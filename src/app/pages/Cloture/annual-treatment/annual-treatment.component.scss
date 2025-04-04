@@ -1,0 +1,79 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+// Custom scrollbar for the table
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+// Add some additional styling for the active tab
+.border-blue-500 {
+  border-bottom-width: 3px;
+}
+
+// Status indicators styling
+.rounded-full {
+  font-weight: 500;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .flex-col {
+    gap: 1rem;
+  }
+}
+
+// Table styling
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+th {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+td, th {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+td:last-child, th:last-child {
+  border-right: none;
+}
+
+// Button styling
+button {
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  }
+}

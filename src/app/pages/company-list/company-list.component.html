@@ -1,0 +1,112 @@
+<div class="relative min-h-screen w-full">
+    <div 
+      class="absolute w-full h-full top-0 left-0 z-0"
+      [ngStyle]="{
+        'background-image': 'url(images/wave_3.png)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-position': 'center',
+        'opacity': '0.5'
+      }"
+    ></div>
+  
+    <div class="surface-ground min-h-screen p-4 md:p-6 lg:p-8 relative z-1">
+      <p-toast></p-toast>
+  
+      <div class="max-w-screen-xl mx-auto" [@fadeInUp]>
+        <!-- Admin Section -->
+        <p-card styleClass="shadow-2 border-round-xl bg-white mb-4">
+          <div class="flex items-center p-4">
+            <div class="flex items-center gap-3 flex-grow">
+              <img 
+                src="images/logo-client-light.png" 
+                alt="Admin" 
+                class="w-20"
+              >
+              <div>
+                <h2 class="text-xl font-medium m-0">Portail d'administration</h2>
+                <p class="text-sm text-500 m-0">Accès sécurisé à la gestion du système</p>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <p-button
+              label="Accéder au panneau d'administration"
+              styleClass="p-button-success p-button-rounded"
+              (onClick)="handleAdminClick()"
+            ></p-button>
+            </div>
+          </div>
+        </p-card>
+  
+        <div class="mt-8 mb-4 text-center">
+          <div class="inline-flex align-items-center gap-2">
+            <i class="pi pi-building text-600"></i>
+            <span class="text-600">Accès à l'entreprise</span>
+          </div>
+        </div>
+  
+        <!-- Search Bar -->
+        <div class="w-full mb-6 relative">
+          <i class="pi pi-search absolute left-4 top-1/2 transform -translate-y-1/2 text-600 z-10"></i>
+          <input 
+            pInputText 
+            class="w-full p-3 pl-10 rounded-3xl bg-white"
+            placeholder="Rechercher des entreprises par nom..."
+            (input)="handleSearch($event)"
+          >
+        </div>
+  
+        <!-- Companies Grid -->
+        <div class="grid gap-4">
+          <div 
+            *ngFor="let company of filteredCompanies" 
+            class="col-12 md:col-6 lg:col-4"
+            [@cardAnimation]
+          >
+            <p-card 
+              styleClass="cursor-pointer transition-colors transition-duration-150 hover:surface-hover"
+              (click)="handleCompanyClick(company)"
+            >
+              <div class="flex align-items-center gap-4" style="height: 50px">
+                <div 
+                  class="flex justify-content-center align-items-center surface-100 border-round"
+                  style="max-width: 120px; max-height: 120px; padding: 1rem; margin-right: 1rem"
+                >
+                  <img 
+                    [src]="company.logo" 
+                    [alt]="company.name"
+                    class="w-full h-full object-contain"
+                  >
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-900 font-semibold text-xl m-0 mb-2">{{company.name}}</h3>
+                  <div class="flex align-items-center text-600">
+                    <i class="pi pi-sign-in mr-2"></i>
+                    <span>Cliquez pour accéder au portail</span>
+                  </div>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+  
+        <!-- Empty State -->
+        <div *ngIf="filteredCompanies.length === 0 && !loading" class="text-center mt-8">
+          <i class="pi pi-search text-600 text-4xl mb-3"></i>
+          <h3 class="text-xl font-medium text-700 mb-2">Aucune entreprise trouvée</h3>
+          <p class="text-600">
+            Nous n'avons trouvé aucune entreprise correspondant à vos critères de recherche.
+          </p>
+        </div>
+  
+        <!-- Loading State -->
+        <div *ngIf="loading" class="surface-card border-round-xl p-8 mt-4">
+          <div class="flex flex-column align-items-center text-center">
+            <i class="pi pi-spin pi-spinner text-primary text-5xl mb-4"></i>
+            <h3 class="text-900 font-medium">Loading Companies</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Tabs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .nav-container {
+            background: white;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-tabs {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+
+        .nav-item {
+            margin: 0 3px;
+           
+            
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 15px 11px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+        }
+
+        
+        .nav-link:hover {
+            color: #007bff;
+        }
+
+       
+        .nav-link.active {
+            color: #007bff;
+        }
+
+        
+        .nav-link.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px; 
+            width: 100%;
+            height: 3px; 
+            background-color: #007bff;
+        }
+       
+        .card {
+            background: white;
+            height: 10vh;
+            margin-top: 10px;
+            padding: 15px;
+            
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-tab {
+            background: white;
+           
+            margin-top: 10px;
+            padding: 15px;
+            
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            background: #fff;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 300px;
+            height: 20px;
+        }
+
+        .search-bar i {
+            color: #aaa;
+            margin-right: 5px;
+        }
+        .btn-expo {
+            background-color: #1e82aa;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-left: 50vh ;
+            width: 200px;
+        }
+
+        
+        .btn-add {
+            background-color: #1e82aa;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .btn-add i {
+            margin-right: 5px;
+        }
+
+        .btn-add:hover {
+            background-color: #0056b3;
+        }
+
+       
+        #salary-table {
+            width: 100%;
+            border-collapse: collapse; 
+            margin-top: 10px;
+        }
+
+        #salary-table th,
+        #salary-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        #salary-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        #salary-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #salary-table tr:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+        }
+
+        #salary-table td {
+            color: #495057;
+        }
+
+        #salary-table td:hover {
+            background-color: #f8f9fa;
+        }
+
+        
+        #salary-table th, #salary-table td {
+            border: 1px solid #ddd;
+        }
+
+        
+        #salary-table td {
+            font-size: 14px;
+        }
+
+        
+        #salary-table {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        #salary-table th {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+<nav class="nav-container">
+    <ul class="nav-tabs">
+        <li class="nav-item"><a href="#" class="nav-link active" onclick="setActive(event)"><i class="pi pi-list"></i> Liste des salariés</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-users"></i> Etat civil</a></li>
+      
+        <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-file"></i> Contrat de travail</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-building"></i> Organismes sociaux</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-credit-card"></i> Cordonnees bancaires</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-money-bill"></i> Element de paie </a></li>
+        <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-calendar"></i> Gestion congé</a></li>
+    </ul>
+</nav>
+<div class="card">
+   
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Recherche salarié">
+    </div>
+    
+     <button class="btn-expo">
+        <i class="pi pi-file-export"> </i> Exportation Fiche salarie
+    </button>
+    
+    <button class="btn-add">
+        <i class="fas fa-plus"></i> Nouveau
+    </button>
+</div>
+<div class="card-tab">
+  <table id="salary-table">
+    <thead>
+        <tr>
+            <th>Matricule</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Titre</th>
+            <th>Fonction</th>
+            <th>Poste</th>
+            <th>Actif</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Les lignes seront insérées ici par JavaScript -->
+    </tbody>
+</table>
+</div>
+<script>
+    // Fonction pour récupérer les données et les afficher
+    function loadSalaries() {
+        // Log pour vérifier si la fonction est appelée
+        console.log("loadSalaries appelée");
+
+        // Données statiques pour le test
+        const data = [
+            { Matricule: 1, Nom: 'Dupont', Prénom: 'Jean', Titre: 2, Fonction: 'Manager', Poste: 'hjkmc', Actif: 1 },
+            { Matricule: 2, Nom: 'Martin', Prénom: 'Paul', Titre: 28, Fonction: 'Développeur', Poste: 'dsfyguh', Actif: 0 },
+            { Matricule: 3, Nom: 'Lemoine', Prénom: 'Sophie', Titre: 40, Fonction: 'HR', Poste: 'dguhji', Actif: 1 }
+        ];
+
+        // Sélectionner le corps du tableau
+        const tableBody = document.querySelector('#salary-table tbody');
+        tableBody.innerHTML = ''; // Effacer les anciennes lignes si elles existent
+
+        // Remplir le tableau avec les nouvelles données
+        data.forEach(salary => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${salary.Matricule}</td>
+                <td>${salary.Nom}</td>
+                <td>${salary.Prénom}</td>
+                <td>${salary.Titre}</td>
+                <td>${salary.Fonction}</td>
+                
+                <td>${salary.Poste}€</td>
+                 <td>${salary.Poste}€</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Appeler la fonction pour charger les données au chargement de la page
+    window.onload = loadSalaries;
+
+    function setActive(event) {
+        // Empêche le comportement par défaut du lien
+        event.preventDefault();
+
+        // Supprime la classe "active" de tous les liens
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Ajoute la classe "active" au lien cliqué
+        event.currentTarget.classList.add('active');
+    }
+</script>
+</body>
+</html>

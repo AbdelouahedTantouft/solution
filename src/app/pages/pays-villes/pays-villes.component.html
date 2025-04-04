@@ -1,0 +1,22 @@
+<div class="card">
+<div class="card-1">
+<div class="container">
+    
+    <div class="panel" *ngFor="let category of categories">
+      <h3>{{ category.title }}</h3>
+      <div class="search-box">
+        <input type="text" placeholder="Rechercher..." [(ngModel)]="category.searchText">
+        <button (click)="addItem(category)">+</button>
+      </div>
+      <div class="list-container">
+        <ul>
+          <li *ngFor="let item of filterList(category.items, category.searchText)">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
+    </div>
+</div>
+</div>
+  
+</div>

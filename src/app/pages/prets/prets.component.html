@@ -1,0 +1,116 @@
+<div class="card">
+    <p>Gestion des prêts</p>
+  </div>
+  
+  <nav class="nav-container">
+    <ul class="nav-tabs">
+      <li class="nav-item"><a href="#" class="nav-link active" onclick="setActive(event)"><i class="pi pi-list"></i> Création Prêt</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-list"></i> Liste des prêts</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" onclick="setActive(event)"><i class="pi pi-file"></i> Etat global des prêts</a></li>
+    </ul>
+  </nav>
+  
+  <p-splitter [style]="{ height: '600px' }" styleClass="mb-8"   >
+    <ng-template #panel>
+    
+      <div class="card-panel-1 ">
+        <div class ="card-1" style="display: flex; gap: 20px;">
+            <p-floatlabel variant="on">
+                <input pInputText id="matricule_label" [(ngModel)]="value2" autocomplete="off"  style="width: 190px; height: 30px; border: 1px solid #8b8b8b; border-radius: 5px;" />
+                <label for="matricule_label">Matricule</label>
+            </p-floatlabel>
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 190px; height: 30px; border: 1px solid #8b8b8b; border-radius: 5px;" />
+                    <p-button icon="pi pi-search" severity="secondary" variant="text" />
+                </div>
+                <label for="on_label">Nom</label>
+            </p-floatlabel>   
+            
+        </div>
+        <div class="card-label" style="border-top: 3px solid #4CAF50; padding: 10px 0; font-size: 14px; font-weight: bold; text-align: center; background-color: #f4f4f4;">
+            Type de prêt
+        </div>
+        <div class="card-2 flex gap-4" >
+            
+            <div class="flex items-center">
+                <p-radiobutton name="pizza" value="Cheese" [(ngModel)]="ingredient" inputId="ingredient1" />
+                <label for="ingredient1" class="ml-2" style="font-size: 12.3px;">Prêt à court terme</label>
+            </div>
+        
+            <div class="flex items-center">
+                <p-radiobutton name="pizza" value="Mushroom" [(ngModel)]="ingredient" inputId="ingredient2" />
+                <label for="ingredient2" class="ml-2"  style="font-size: 12.3px;">Tableau des intérêts</label>
+            </div>
+            
+            <button class="btn-expo flex items-center">
+                <i class="pi pi-file-export"></i> Importation des prêts
+            </button>
+        </div>
+
+
+        <div class="card-label" style="border-top: 3px solid #4CAF50; padding: 10px 0; font-size: 14px; font-weight: bold; text-align: center; background-color: #f4f4f4;">
+            
+        </div>
+        <div class="card-3 " >
+            <p-floatlabel variant="on">
+                <input pInputText id="matricule_label" [(ngModel)]="value2" autocomplete="off"  style="width: 300px; height: 30px; border: 1px solid #9e9c9c;  border-radius: 5px;" />
+                <label for="matricule_label">N Document</label>
+            </p-floatlabel>
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 300px; height: 30px; margin-top:12px; border: 1px solid #9e9c9c; border-radius: 5px;" />
+                    <p-button icon="pi pi-search" severity="secondary" variant="text" />
+                </div>
+                <label for="on_label">Libelle pret</label>
+            </p-floatlabel>  
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 300px; height: 30px; margin-top:12px; border: 1px solid #9e9c9c; border-radius: 5px;" />
+                   
+                </div>
+                <label for="on_label">Montant</label>
+            </p-floatlabel>  
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 300px; height: 30px; margin-top:12px; border: 1px solid #9e9c9c; border-radius: 5px;" />
+                    
+                </div>
+                <label for="on_label">Duree</label>
+            </p-floatlabel> 
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 300px; height: 30px; margin-top:12px; border: 1px solid #9e9c9c; border-radius: 5px;" />
+                  
+                </div>
+                <label for="on_label">Montant echeance</label>
+            </p-floatlabel> 
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 300px; height: 30px; margin-top:12px; border: 1px solid #9e9c9c; border-radius: 5px;" />
+                    
+                </div>
+                <label for="on_label">Mois solde</label>
+            </p-floatlabel> 
+            <p-floatlabel variant="on">
+                <div style="display: flex; align-items: center;">
+                    <input pInputText id="on_label" [(ngModel)]="value2" autocomplete="off" style="width: 300px; height: 30px; margin-top:12px; border: 1px solid #9e9c9c; border-radius: 5px;" />
+                    
+                </div>
+                <label for="on_label">Annee</label>
+            </p-floatlabel> 
+        </div>
+        
+      </div>
+    
+    </ng-template>
+    
+    <ng-template #panel>
+        <div class="card-panel-1 ">
+        
+        </div>
+      </ng-template>
+       
+   
+  </p-splitter>
+  

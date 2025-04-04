@@ -1,0 +1,220 @@
+<div class="card-gener">
+      <div class="card">
+        
+        <label class="mois">Mois </label>
+
+        <select name="mois" id="mois-select">
+            
+            <option value="Janvier">Janvier</option>
+            <option value="Février">Février</option>
+            <option value="Mars">Mars</option>
+            <option value="Avril">Avril</option>
+            <option value="Mai">Mai</option>
+            <option value="Juin">Juin</option>
+            <option value="Juillet">Juillet</option>
+            <option value="Août">Août</option>
+            <option value="Septembre">Septembre</option>
+            <option value="Octobre">Octobre</option>
+            <option value="Novembre">Novembre</option>
+            <option value="Décembre">Décembre</option>
+        </select>
+
+        <button class="btn">
+            <i class="pi pi-plus"></i> Nouveau
+        </button>
+        <button class="btn">
+            <i class="pi pi-clipboard"></i> Coller Données
+        </button>
+        <button class="btn">
+            <i class="pi pi-check-circle"></i> Vérification Données Importées
+        </button>
+        <button class="btn">
+            <i class="pi pi-cog"></i> Paramétrage
+        </button>
+        <button class="btn">
+            <i class="pi pi-save"></i> Sauvegarder
+        </button>
+        
+      </div>
+      </div>
+      <div class="card2">
+        <button class="btn2">
+            <i class="pi pi-download"></i> Importer Fichier Texte
+        </button>
+      </div>
+      
+<div class="card-tab">
+    <table id="salary-table">
+      <thead>
+          <tr>
+              <th>Matricule</th>
+              <th>Rubrique</th>
+              <th>Désignation</th>
+              <th>Valeur</th>
+              <th>Vérification</th>
+              
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Les lignes seront insérées ici par JavaScript -->
+      </tbody>
+  </table>
+  </div>
+
+<style> 
+    .mois{
+        font-size: 15px;
+        margin-right: 5px;
+
+    }
+    select{
+    
+        padding: 2px 5px;
+        width: 55vh;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        color: #333;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+        }
+
+
+     .card-gener {
+            background: white;
+            
+            margin-top: 10px;
+            padding: 15px;
+            
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card {
+            background: white;
+            height: 10vh;
+            margin-top: 10px;
+            padding: 15px;
+            
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card2 {
+            background: white;
+            height: 10vh;
+            margin-top: 10px;
+            padding: 15px;
+            
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn{
+            background-color: #1e82aa;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            margin-left: 1vh ;
+           
+            height: 33px;
+        }
+        .btn2{
+            background-color: #1e82aa;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-left: 140vh ;
+           
+            height: 33px;
+        }
+        .card-tab {
+            background: white;
+           
+            margin-top: 10px;
+            padding: 15px;
+            
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #salary-table {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        #salary-table th,
+        #salary-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        #salary-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        #salary-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #salary-table tr:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+        }
+
+        #salary-table td {
+            color: #495057;
+        }
+
+        #salary-table td:hover {
+            background-color: #f8f9fa;
+        }
+
+
+        #salary-table th, #salary-table td {
+            border: 1px solid #ddd;
+        }
+
+
+        #salary-table td {
+            font-size: 14px;
+        }
+
+
+        #salary-table {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #salary-table th {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            
+        </style>

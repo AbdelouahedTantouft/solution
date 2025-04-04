@@ -1,0 +1,17 @@
+:host {
+    display: block;
+
+    ::ng-deep {
+        .p-card {
+            .p-card-content {
+                padding: 0;
+            }
+        }
+
+        .p-inputtext {
+            &.p-filled {
+                background: var(--surface-ground);
+            }
+        }
+    }
+}

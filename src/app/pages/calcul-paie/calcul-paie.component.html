@@ -1,0 +1,91 @@
+<div class="card1">
+    <p>Calcul paie des salariés</p>
+  </div>
+<div class="card2">
+    <button class="btn">
+        <i class="pi pi-plus"></i> Nouveau
+    </button>
+    <button class="btn">
+        <i class="pi pi-calculator"></i> Calcul des indemnités
+    </button>
+    <button class="btn">
+        <i class="pi pi-play"></i> Calculer
+    </button>
+    <button class="btn">
+        <i class="pi pi-trash"></i> Supprimer bulletin
+    </button>
+    <button class="btn">
+        <i class="pi pi-print"></i> Imprimer bulletin
+    </button>
+    <button class="btn">
+        <i class="pi pi-file-pdf"></i> Exporter bulletin PDF
+    </button>
+</div>
+<div class="card">
+    <div class="select-container1">
+    <label for="mois">Mois </label>
+    <p-dropdown 
+        class="large-dropdown" 
+        [options]="mois" 
+        [(ngModel)]="selectedMois" 
+        placeholder="Sélectionner un mois" 
+        [showClear]="true">
+    </p-dropdown>
+
+</div>
+<div class="select-container">
+    <label for="Nom">Nom bulletin </label>
+    <p-dropdown 
+    class="large-dropdown" 
+    [options]="Nom" 
+    [(ngModel)]="selectedNom" 
+    placeholder="Sélectionner un nom" 
+    [showClear]="true">
+</p-dropdown>
+</div>
+<div class="select-container">
+    <label for="categorie">Catégorie </label>
+    
+        <div style="display: flex; align-items: center;">
+            <input   style="width: 350px; height: 30px; border: 1.3px solid #c0c3c4; border-radius: 5px; margin-left: 21px;" />
+            <p-button icon="pi pi-search" severity="secondary" variant="text" />
+        </div>
+        
+   
+      <!--button icon="pi pi-search" severity="secondary" variant="text" ></button!-->
+        
+</div>
+<div class="select-container">
+    <label for="service">Service </label>
+    <div style="display: flex; align-items: center;">
+        <input   style="width: 350px; height: 30px; border: 1.3px solid #c0c3c4; border-radius: 5px; margin-left: 39px;" />
+        <p-button icon="pi pi-search" severity="secondary" variant="text" />
+    </div>
+</div>
+
+<div class="select-container">
+    <label for="service">Site</label>
+    <div style="display: flex; align-items: center;">
+        <input   style="width: 350px; height: 30px; border: 1.3px solid #c0c3c4; border-radius: 5px; margin-left: 64px;" />
+        <p-button icon="pi pi-search" severity="secondary" variant="text" />
+    </div>
+</div>
+<div class="select-container-1">
+    <label  class="label-1 " for="service">Modèle bulletin</label>
+    <div style="display: flex; align-items: center;">
+        <input   style="width: 350px; height: 30px; border:1.3px solid #c0c3c4; border-radius: 5px; margin-left: 0cqw;" />
+        <p-button icon="pi pi-search" severity="secondary" variant="text" />
+    </div>
+</div>
+<div class="select-container">
+    <label for="service">Matricule du  </label>
+    <p-calendar [(ngModel)]="date" [style]="{'width': '350px', 'height': '30px', 'border': '1.3px solid #c0c3c4', 'border-radius': '5px', 'margin-left': '1px'}"></p-calendar>
+
+</div>
+<div class="select-container">
+    <label for="service">Au</label>
+    
+    <p-calendar [(ngModel)]="date" [style]="{'width': '350px', 'height': '30px', 'border': '1.3px solid #c0c3c4', 'border-radius': '5px', 'margin-left': '70px'}"></p-calendar>
+
+</div>
+</div>

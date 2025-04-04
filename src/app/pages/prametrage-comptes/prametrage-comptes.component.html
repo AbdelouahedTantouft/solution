@@ -1,0 +1,22 @@
+<div id="features" class="features-container">
+    <div class="grid grid-cols-12 gap-4 justify-center">
+        <div class="col-span-12 text-center mt-20 mb-6">
+            <!--div class="title">Parametrage des comptes</div!-->
+            <span class="subtitle">Parametrage des comptes</span>
+        </div>
+
+        <div *ngFor="let feature of features" class="col-span-12 md:col-span-12 lg:col-span-4 feature-card">
+            <div class="feature-box" [style.background]="feature.gradient">
+                <div class="feature-content">
+                    <div class="feature-icon" [ngClass]="feature.iconBg">
+                        <i [ngClass]="feature.iconClass"></i>
+                    </div>
+                    <h5 class="feature-title">{{ feature.title }}</h5>
+                    <!--span class="feature-description">{{ feature.description }}</span!-->
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="login-container">
+    <div *ngIf="load" class="progress-spinner-container">
+        <p-progressSpinner [style]="{ width: '50px', height: '50px' }">
+        </p-progressSpinner>
+    </div>
+
+    <p-toast></p-toast>
+
+    <img alt="" class="wave-background" src="images/wave.jpg" height="200" width="600" />
+
+    <div class="login-content">
+        <div class="logo-container">
+            <img [alt]="name" [src]="logo" class="company-logo" />
+        </div>
+
+        <p-card styleClass="login-card">
+            <form (ngSubmit)="login($event)"  [formGroup]="loginForm" class="login-form">
+                <img alt="" ngSrc="images/profile.svg" class="profile-icon" height="698" width="698" />
+                <h2 class="login-title">Bienvenu</h2>
+
+                <span class="p-input-icon-left w-full">
+          <i class="fas fa-user"></i>
+          <input pInputText
+                 type="text"
+                 name="matricule"
+                 placeholder="Matricule"
+                 formControlName="email"
+                 [ngClass]="{'ng-dirty ng-invalid': loginForm.get('email')?.touched && loginForm.get('email')?.invalid}"
+                 required
+                 class="w-full" />
+        </span>
+
+                <span class="p-input-icon-left w-full">
+          <i class="fas fa-lock"></i>
+          <!--   [type]="showPassword ? 'text' : 'password'" -->
+          <input pInputText
+                 type="password"
+                 name="password"
+                 placeholder="Mot de passe"
+                
+               
+                            pInputText
+                            class="styled-input"
+                            formControlName="password"
+                            [ngClass]="{'ng-dirty ng-invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}"
+                 required
+                 class="w-full" />
+        </span>
+
+                <a routerLink="/forgot-password" class="forgot-password">
+                    Mot de passe oublié?
+                </a>
+
+                <p-button type="submit"
+                          label="Se connecter"
+                          styleClass="login-button w-full">
+                </p-button>
+            </form>
+        </p-card>
+    </div>
+</div>

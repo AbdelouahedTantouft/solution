@@ -1,0 +1,99 @@
+.card {
+    background: white;
+    //height: 10vh;
+    margin-top: 10px;
+    padding: 15px;
+    
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    //display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn{
+    background-color: #1e82aa;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin-left: 1vh ;
+   
+    height: 33px;
+}
+
+.card1{
+    background: white;
+    height: 6vh;
+    margin-top: 2px;
+    padding: 15px;
+   
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card1 p{
+  font-size: 16px;
+  font-style: italic;
+  text-shadow: 0px 0px 8px rgba(24, 119, 156, 0.8);
+}
+.card1 p:hover{
+    color: #18779c;
+    text-shadow: 0px 0px 8px rgba(24, 119, 156, 0.8);
+  }
+  .card2 {
+    background: white;
+    height: 10vh;
+    margin-top: 10px;
+    padding: 15px;
+    
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.select-container1 {
+    display: flex;
+    align-items: center; 
+    gap: 84px; 
+    
+    
+}
+.select-container {
+    display: flex;
+    align-items: center; 
+    gap: 28px; 
+    
+    
+}
+.large-dropdown {
+    width: 350px !important; 
+    
+   
+}
+
+label {
+    
+    font-size: medium;
+    
+    padding: 10px;
+}
+.label-1 {
+    
+    font-size: medium;
+    padding-right: 0px;
+    padding: 10px;
+}
+.select-container-1 {
+    display: flex;
+    align-items: center; 
+    gap: 9px; 
+    
+    
+}

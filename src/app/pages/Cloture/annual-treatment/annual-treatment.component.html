@@ -1,0 +1,128 @@
+<div class="flex flex-col min-h-screen bg-gray-50">
+  <!-- Navigation Tabs -->
+  <div class="border-b">
+    <div class="flex overflow-x-auto">
+      <ng-container *ngFor="let tab of tabs">
+        <button 
+          [class]="'flex items-center px-4 py-4 text-sm font-medium whitespace-nowrap ' + 
+                  (activeTab === tab.id ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-600 hover:text-blue-500')"
+          (click)="setActiveTab(tab.id)">
+          <i [class]="tab.icon + ' mr-2'"></i>
+          {{ tab.label }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Search and Action Buttons -->
+  <div class="p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="relative w-full sm:w-auto">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm"
+        placeholder="Recherche base de données" 
+        class="pl-10 pr-4 py-2 border rounded-md w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+        <i class="pi pi-search"></i>
+      </span>
+    </div>
+    
+    <div class="flex gap-2 w-full sm:w-auto">
+      <button 
+        (click)="exportData()" 
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+        <i class="pi pi-download"></i>
+        Exportation
+      </button>
+      <button 
+        (click)="addNewRecord()" 
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+        <i class="pi pi-plus"></i>
+        Nouveau
+      </button>
+    </div>
+  </div>
+
+  <!-- Content based on active tab -->
+  <div class="px-6 pb-6">
+    <!-- Annual Closing Process Tab -->
+    <div *ngIf="activeTab === 'annual-closing'" class="overflow-x-auto">
+      <div class="mb-4 flex items-center">
+        <span class="text-gray-700 font-medium mr-2">Statut:</span>
+        <span 
+          [class]="'px-3 py-1 rounded-full text-sm ' + 
+                  (processStatus === 'completed' ? 'bg-green-100 text-green-800' : 
+                   processStatus === 'failed' ? 'bg-red-100 text-red-800' : 
+                   'bg-yellow-100 text-yellow-800')">
+          {{ processStatus === 'completed' ? 'Traitement terminé' : 
+             processStatus === 'failed' ? 'Échec du traitement' : 
+             'Traitement en cours' }}
+        </span>
+      </div>
+      
+      <table class="min-w-full bg-white border">
+        <thead>
+          <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left border-r">ANNÉE</th>
+            <th class="py-3 px-6 text-left border-r">CODE</th>
+            <th class="py-3 px-6 text-left border-r">NOM SOCIÉTÉ</th>
+            <th class="py-3 px-6 text-left border-r">NOM DB</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm">
+          <ng-container *ngIf="databaseRecords.length > 0; else noRecords">
+            <tr *ngFor="let record of databaseRecords" class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">{{ record.year }}</td>
+              <td class="py-3 px-6 border-r">{{ record.code }}</td>
+              <td class="py-3 px-6 border-r">{{ record.companyName }}</td>
+              <td class="py-3 px-6 border-r">{{ record.databaseName }}</td>
+            </tr>
+          </ng-container>
+          <ng-template #noRecords>
+            <tr>
+              <td colspan="4" class="py-10 text-center text-gray-500">
+                Aucun enregistrement trouvé
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Database Verification Tab -->
+    <div *ngIf="activeTab === 'database-verification'" class="overflow-x-auto">
+      <table class="min-w-full bg-white border">
+        <thead>
+          <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left border-r">NOUVEAU NOM DE LA BASE DE DONNÉE</th>
+            <th class="py-3 px-6 text-left border-r">ÉTAT</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm">
+          <ng-container *ngIf="databaseRecords.length > 0; else noVerificationRecords">
+            <tr *ngFor="let record of databaseRecords" class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">{{ record.newDatabaseName || 'Vide' }}</td>
+              <td class="py-3 px-6">
+                <span 
+                  [class]="'px-2 py-1 rounded-full text-xs ' + 
+                          (record.status === 'valid' ? 'bg-green-100 text-green-800' : 
+                           record.status === 'invalid' ? 'bg-red-100 text-red-800' : 
+                           'bg-yellow-100 text-yellow-800')">
+                  {{ getStatusText(record.status) }}
+                </span>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noVerificationRecords>
+            <tr>
+              <td colspan="2" class="py-10 text-center text-gray-500">
+                Aucun enregistrement trouvé
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
