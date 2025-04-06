@@ -1,0 +1,684 @@
+<div class="flex flex-col min-h-screen bg-gray-50">
+  <!-- Navigation Tabs -->
+  <div class="border-b">
+    <div class="flex overflow-x-auto">
+      <ng-container *ngFor="let tab of tabs">
+        <button
+          [class]="
+            'flex items-center px-4 py-4 text-sm font-medium whitespace-nowrap ' +
+            (activeTab === tab.id
+              ? 'text-blue-500 border-b-2 border-blue-500'
+              : 'text-gray-600 hover:text-blue-500')
+          "
+          (click)="setActiveTab(tab.id)"
+        >
+          <i [class]="tab.icon + ' mr-2'"></i>
+          {{ tab.label }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Search and Action Buttons -->
+  <!-- <div class="p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="relative w-full sm:w-auto">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Recherche base de données"
+        class="pl-10 pr-4 py-2 border rounded-md w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <span
+        class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+      >
+        <i class="pi pi-search"></i>
+      </span>
+    </div>
+
+    <div class="flex gap-2 w-full sm:w-auto">
+      <button
+        (click)="exportData()"
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+      >
+        <i class="pi pi-download"></i>
+        Exportation
+      </button>
+      <button
+        (click)="addNewRecord()"
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+      >
+        <i class="pi pi-plus"></i>
+        Nouveau
+      </button>
+    </div>
+  </div> -->
+
+  <!-- Content based on active tab -->
+  <div class="px-6 pb-6">
+    <!-- List Rubrique Tab -->
+    <div *ngIf="activeTab === 'annual-closing'" class="overflow-x-auto">
+      <!-- Type Filter -->
+      <div class="p-4 flex items-center gap-4 mt-4">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            [(ngModel)]="typeFilter"
+            value="ALL"
+            class="hidden"
+          />
+          <span
+            class="px-4 py-2 border rounded-md"
+            [class.bg-blue-500]="typeFilter === 'ALL'"
+            [class.text-white]="typeFilter === 'ALL'"
+          >
+            Tous
+          </span>
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            [(ngModel)]="typeFilter"
+            value="FIXE"
+            class="hidden"
+          />
+          <span
+            class="px-4 py-2 border rounded-md"
+            [class.bg-blue-500]="typeFilter === 'FIXE'"
+            [class.text-white]="typeFilter === 'FIXE'"
+          >
+            FIXE
+          </span>
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            [(ngModel)]="typeFilter"
+            value="VARIABLE"
+            class="hidden"
+          />
+          <span
+            class="px-4 py-2 border rounded-md"
+            [class.bg-blue-500]="typeFilter === 'VARIABLE'"
+            [class.text-white]="typeFilter === 'VARIABLE'"
+          >
+            VARIABLE
+          </span>
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            [(ngModel)]="typeFilter"
+            value="CALCUL"
+            class="hidden"
+          />
+          <span
+            class="px-4 py-2 border rounded-md"
+            [class.bg-blue-500]="typeFilter === 'CALCUL'"
+            [class.text-white]="typeFilter === 'CALCUL'"
+          >
+            CALCUL
+          </span>
+        </label>
+      </div>
+      <!-- Search and Action Buttons -->
+      <div
+        class="p-4 flex flex-col sm:flex-row justify-between items-center gap-4"
+      >
+        <div class="relative w-full sm:w-auto">
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            placeholder="Recherche base de données"
+            class="pl-10 pr-4 py-2 border rounded-md w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <span
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          >
+            <i class="pi pi-search"></i>
+          </span>
+        </div>
+
+        <div class="flex gap-2 w-full sm:w-auto">
+          <button
+            (click)="exportData()"
+            class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            <i class="pi pi-download"></i>
+            Exportation
+          </button>
+          <button
+            (click)="addNewRecord()"
+            class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            <i class="pi pi-plus"></i>
+            Nouveau
+          </button>
+        </div>
+      </div>
+
+      <table class="min-w-full bg-white border" id="rubriqueTable">
+        <thead>
+          <tr
+            class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal"
+          >
+            <th class="py-3 px-6 text-left border-r">CODE</th>
+            <th class="py-3 px-6 text-left border-r">Nom de rubrique</th>
+            <th class="py-3 px-6 text-left border-r">Type</th>
+            <th class="py-3 px-6 text-left border-r">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm">
+          <ng-container *ngIf="filteredRubriques.length > 0; else noRecords">
+            <tr
+              *ngFor="let record of filteredRubriques"
+              class="border-b hover:bg-gray-50"
+            >
+              <td class="py-3 px-6 border-r">{{ record.code }}</td>
+              <td class="py-3 px-6 border-r">{{ record.nom }}</td>
+              <td class="py-3 px-6 border-r">{{ record.type }}</td>
+              <td class="py-3 px-6 border-r">
+                <button (click)="viewItem(record)" class="px-5 py-3">
+                  <fa-icon [icon]="faEye" class="w-6 h-6"></fa-icon>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noRecords>
+            <tr>
+              <td colspan="4" class="py-10 text-center text-gray-500">
+                Aucun enregistrement trouvé
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Database Verification Tab -->
+    <div *ngIf="activeTab === 'database-verification'" class="overflow-x-auto">
+      <div class="p-4 space-y-4">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-4">Tableau IGR</h2>
+          <div class="flex flex-col gap-4 mb-4">
+            <!-- Form elements in one row -->
+            <div class="flex flex-row gap-4 items-end">
+              <form
+                [formGroup]="trancheForm"
+                (ngSubmit)="addTranche()"
+                class="flex flex-row gap-4 items-end"
+              >
+                <div class="flex flex-col p-2">
+                  <label
+                    for="valuerdu"
+                    class="text-sm font-medium text-gray-700"
+                    >Du:</label
+                  >
+                  <input
+                    type="number"
+                    class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                    id="valuerdu"
+                    placeholder="Valeur Du"
+                    formControlName="valeurDu"
+                  />
+                </div>
+
+                <div class="flex flex-col p-2">
+                  <label
+                    for="valeurau"
+                    class="text-sm font-medium text-gray-700"
+                    >Au:</label
+                  >
+                  <input
+                    type="number"
+                    class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                    id="valeurau"
+                    placeholder="Au"
+                    formControlName="valeurAu"
+                  />
+                </div>
+
+                <div class="flex flex-col p-2">
+                  <label for="taux" class="text-sm font-medium text-gray-700"
+                    >Taux (%):</label
+                  >
+                  <input
+                    type="number"
+                    class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                    id="taux"
+                    placeholder="Taux (%)"
+                    formControlName="taux"
+                  />
+                </div>
+
+                <div class="flex flex-col p-2">
+                  <label
+                    for="abattement"
+                    class="text-sm font-medium text-gray-700"
+                    >Abattement:</label
+                  >
+                  <input
+                    type="number"
+                    class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                    id="abattement"
+                    placeholder="Abattement"
+                    formControlName="abattement"
+                  />
+                </div>
+
+                <!-- Button for adding tranche -->
+                <div class="p-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  >
+                    +
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Table in second row, full width -->
+            <div class="w-full">
+              <table class="table-auto min-w-full bg-white border">
+                <thead>
+                  <tr
+                    class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal"
+                  >
+                    <th class="py-3 px-6 text-left border-r">N°</th>
+                    <th class="py-3 px-6 text-left border-r">Du</th>
+                    <th class="py-3 px-6 text-left border-r">Au</th>
+                    <th class="py-3 px-6 text-left border-r">Taux</th>
+                    <th class="py-3 px-6 text-left border-r">Abattement</th>
+                    <th class="py-3 px-6 text-left border-r">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm">
+                  <tr
+                    *ngFor="let tranche of tranches; let i = index"
+                    class="border-b hover:bg-gray-50"
+                  >
+                    <td class="py-3 px-6 text-left border-r">{{ i + 1 }}</td>
+                    <td class="py-3 px-6 text-left border-r">
+                      <input
+                        type="number"
+                        [(ngModel)]="tranche.valeurDu"
+                        (change)="
+                          updateTranche(tranche, 'valeurDu', tranche.valeurDu)
+                        "
+                        class="w-full"
+                      />
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      <input
+                        type="number"
+                        [(ngModel)]="tranche.valeurAu"
+                        (change)="
+                          updateTranche(tranche, 'valeurAu', tranche.valeurAu)
+                        "
+                        class="w-full"
+                      />
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      <input
+                        type="number"
+                        [(ngModel)]="tranche.taux"
+                        (change)="updateTranche(tranche, 'taux', tranche.taux)"
+                        class="w-full"
+                      />
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      <input
+                        type="number"
+                        [(ngModel)]="tranche.abattement"
+                        (change)="
+                          updateTranche(
+                            tranche,
+                            'abattement',
+                            tranche.abattement
+                          )
+                        "
+                        class="w-full"
+                      />
+                    </td>
+                    <td class="py-3 px-6 text-left border-r flex space-x-2">
+                      <button
+                        (click)="deleteTranche(tranche.id)"
+                        class="text-red-600 hover:text-red-800 p-2 rounded-full hover:bg-red-100 transition-colors duration-200"
+                      >
+                        <fa-icon [icon]="faTrashAlt"></fa-icon>
+                      </button>
+                      <button
+                        (click)="saveTranche(tranche.id)"
+                        class="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100 transition-colors duration-200"
+                      >
+                        <fa-icon [icon]="faSave"></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'TableauAncianite'" class="overflow-x-auto">
+      <div class="p-4 space-y-4">
+        <div class="p-4">
+          <div class="flex gap-4">
+            <!-- First Table Container -->
+            <div class="flex flex-col">
+              <h3 class="text-lg font-semibold mb-2 text-gray-700">
+                Ancienneté
+              </h3>
+              <div class="flex flex-col gap-4 mb-4">
+                <!-- Form elements in one row -->
+                <div class="flex flex-row gap-4 items-end">
+                  <form
+                    [formGroup]="ancianiteForm"
+                    (ngSubmit)="addAncianite()"
+                    class="flex flex-row gap-4 items-end"
+                  >
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="valuerdu"
+                        class="text-sm font-medium text-gray-700"
+                        >Du:</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="valuerdu"
+                        placeholder="Valeur Du"
+                        formControlName="valeurDuAnc"
+                      />
+                    </div>
+
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="valeurau"
+                        class="text-sm font-medium text-gray-700"
+                        >Au:</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="valeurau"
+                        placeholder="Au"
+                        formControlName="valeurAuAnc"
+                      />
+                    </div>
+
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="taux"
+                        class="text-sm font-medium text-gray-700"
+                        >Taux (%):</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="taux"
+                        placeholder="Taux (%)"
+                        formControlName="tauxAnc"
+                      />
+                    </div>
+
+                    <!-- Button for adding tranche -->
+                    <div class="p-2">
+                      <button
+                        type="submit"
+                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <table class="table-auto bg-white border min-w-[600px]">
+                <thead>
+                  <tr
+                    class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal"
+                  >
+                    <th class="py-3 px-6 text-left border-r">N°</th>
+                    <th class="py-3 px-6 text-left border-r">Du</th>
+                    <th class="py-3 px-6 text-left border-r">Au</th>
+                    <th class="py-3 px-6 text-left border-r">Taux</th>
+                  </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm">
+                  <tr
+                    *ngFor="let anc of ancianite; let i = index"
+                    class="border-b hover:bg-gray-50"
+                  >
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ anc.id }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ anc.valeurDuAnc }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ anc.valeurAuAnc }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ anc.tauxAnc }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Second Table Container -->
+            <div class="flex flex-col">
+              <h3 class="text-lg font-semibold mb-2 text-gray-700">
+                Taux Congés
+              </h3>
+              <div class="flex flex-col gap-4 mb-4">
+                <!-- Form elements in one row -->
+                <div class="flex flex-row gap-4 items-end">
+                  <form
+                    [formGroup]="congeForm"
+                    (ngSubmit)="addConge()"
+                    class="flex flex-row gap-4 items-end"
+                  >
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="valuerdu"
+                        class="text-sm font-medium text-gray-700"
+                        >Du:</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="valuerdu"
+                        placeholder="Valeur Du"
+                        formControlName="valeurDuConge"
+                      />
+                    </div>
+
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="valeurau"
+                        class="text-sm font-medium text-gray-700"
+                        >Au:</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="valeurau"
+                        placeholder="Au"
+                        formControlName="valeurAuConge"
+                      />
+                    </div>
+
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="taux"
+                        class="text-sm font-medium text-gray-700"
+                        >Taux (%):</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="taux"
+                        placeholder="Taux (%)"
+                        formControlName="tauxConge"
+                      />
+                    </div>
+                    <div class="flex flex-col p-2">
+                      <label
+                        for="nombreJoursConge"
+                        class="text-sm font-medium text-gray-700"
+                        >Nombre de Jours :</label
+                      >
+                      <input
+                        type="number"
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full text-base"
+                        id="nombreJoursConge"
+                        placeholder="Nombre de Jours"
+                        formControlName="nombreJoursConge"
+                      />
+                    </div>
+
+                    <!-- Button for adding tranche -->
+                    <div class="p-2">
+                      <button
+                        type="submit"
+                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <table class="table-auto bg-white border min-w-[600px]">
+                <thead>
+                  <tr
+                    class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal"
+                  >
+                    <th class="py-3 px-6 text-left border-r">N°</th>
+                    <th class="py-3 px-6 text-left border-r">Du</th>
+                    <th class="py-3 px-6 text-left border-r">Au</th>
+                    <th class="py-3 px-6 text-left border-r">Taux</th>
+                    <th class="py-3 px-6 text-left border-r">Nombre Jours</th>
+                  </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm">
+                  <tr
+                    *ngFor="let conge of congeRecords; let i = index"
+                    class="border-b hover:bg-gray-50"
+                  >
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ conge.id }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ conge.valeurDuConge }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ conge.valeurAuConge }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ conge.tauxConge }}
+                    </td>
+                    <td class="py-3 px-6 text-left border-r">
+                      {{ conge.nombreJoursConge }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'RubriqueConge'" class="overflow-x-auto">
+      <div class="p-4 space-y-4">
+        <div
+          class="p-4 flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
+          <div class="relative w-full sm:w-auto">
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              placeholder="Recherche base de données"
+              class="pl-10 pr-4 py-2 border rounded-md w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <span
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            >
+              <i class="pi pi-search"></i>
+            </span>
+          </div>
+
+          <div class="flex gap-2 w-full sm:w-auto">
+            <button
+              (click)="exportData()"
+              class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              <i class="pi pi-download"></i>
+              Exportation
+            </button>
+            <button
+              (click)="addNewRecord()"
+              class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              <i class="pi pi-plus"></i>
+              Nouveau
+            </button>
+          </div>
+        </div>
+
+        <table class="min-w-full bg-white border">
+          <thead>
+            <tr
+              class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal"
+            >
+              <th class="py-3 px-6 text-left border-r">N°</th>
+              <th class="py-3 px-6 text-left border-r">Type</th>
+              <th class="py-3 px-6 text-left border-r">Code rubrique</th>
+              <th class="py-3 px-6 text-left border-r">Nom rubrique</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm">
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">1</td>
+              <td class="py-3 px-6 border-r">Solde Congé</td>
+              <td class="py-3 px-6 border-r">Congé Acquis</td>
+              <td class="py-3 px-6 border-r">Congé Pris</td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">2</td>
+              <td class="py-3 px-6 border-r">Solde Congé</td>
+              <td class="py-3 px-6 border-r">Congé Acquis</td>
+              <td class="py-3 px-6 border-r">Congé Pris</td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">1</td>
+              <td class="py-3 px-6 border-r">Solde Congé</td>
+              <td class="py-3 px-6 border-r">Congé Acquis</td>
+              <td class="py-3 px-6 border-r">Congé Pris</td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">1</td>
+              <td class="py-3 px-6 border-r">Solde Congé</td>
+              <td class="py-3 px-6 border-r">Congé Acquis</td>
+              <td class="py-3 px-6 border-r">Congé Pris</td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-3 px-6 border-r">1</td>
+              <td class="py-3 px-6 border-r">Solde Congé</td>
+              <td class="py-3 px-6 border-r">Congé Acquis</td>
+              <td class="py-3 px-6 border-r">Congé Pris</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,754 @@
+<div class="flex flex-col min-h-screen bg-gray-50">
+  <div class="px-6 pb-6">
+    <h2 class="text-2xl font-semibold text-center mb-6">Rubrique</h2>
+
+    <form [formGroup]="rubriqueForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="border border-gray-300 rounded-md p-6 relative mt-8">
+          <!-- tiire aver border -->
+          <div
+            class="absolute -top-4 left-4 bg-white px-2 text-lg font-semibold text-gray-700"
+          >
+            Paramètres de Rubrique
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Code Rubrique -->
+            <div>
+              <label
+                for="codeRubrique"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Code Rubrique
+              </label>
+              <input
+                id="codeRubrique"
+                formControlName="codeRubrique"
+                [readonly]="true"
+                [disabled]="true"
+                type="text"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                value=""
+              />
+            </div>
+            <!-- Plafond -->
+            <div>
+              <label
+                for="plafond"
+                class="block text-sm font-medium text-gray-700"
+                >Plafond</label
+              >
+              <input
+                id="plafond"
+                formControlName="plafond"
+                type="number"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <!-- Arrondi -->
+            <div>
+              <label
+                for="arrondi"
+                class="block text-sm font-medium text-gray-700"
+                >Arrondi</label
+              >
+              <input
+                id="arrondi"
+                formControlName="arrondi"
+                type="checkbox"
+                class="mt-1 border-gray-300 rounded-md"
+              />
+            </div>
+            <!-- Cumul -->
+            <div>
+              <label for="cumul" class="block text-sm font-medium text-gray-700"
+                >Cumul</label
+              >
+              <input
+                id="cumul"
+                formControlName="cumul"
+                type="checkbox"
+                class="mt-1 border-gray-300 rounded-md"
+              />
+            </div>
+            <!-- Nom Rubrique -->
+            <div>
+              <label
+                for="nomRubrique"
+                class="block text-sm font-medium text-gray-700"
+                >Nom de Rubrique</label
+              >
+              <input
+                id="nomRubrique"
+                formControlName="nomRubrique"
+                type="text"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <!-- Nom Réduit -->
+            <div>
+              <label
+                for="nomReduit"
+                class="block text-sm font-medium text-gray-700"
+                >Nom Réduit</label
+              >
+              <input
+                id="nomReduit"
+                formControlName="nomReduit"
+                type="text"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Mode d'Affichage -->
+        <div class="border border-gray-300 rounded-md p-6 relative mt-8">
+          <div
+            class="absolute -top-4 left-4 bg-white px-2 text-lg font-semibold text-gray-700"
+          >
+            Mode d'Affichage
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-col space-y-2">
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="affichageEcranBulletin"
+                  formControlName="modeAffichage"
+                  value="ecranEtBulletin"
+                  class="mr-2"
+                />
+                <label
+                  for="affichageEcranBulletin"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Écran et Bulletin
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="affichageEcran"
+                  formControlName="modeAffichage"
+                  value="ecran"
+                  class="mr-2"
+                />
+                <label
+                  for="affichageEcran"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Écran
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="affichageAucun"
+                  formControlName="modeAffichage"
+                  value="aucun"
+                  class="mr-2"
+                />
+                <label
+                  for="affichageAucun"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Aucun
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center mt-4">
+              <input
+                type="checkbox"
+                id="editionLivrePaie"
+                formControlName="editionLivrePaie"
+                class="mr-2"
+              />
+              <label
+                for="editionLivrePaie"
+                class="text-sm font-medium text-gray-700"
+              >
+                Édition livre de paie
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Type de Rubrique -->
+        <div class="border border-gray-300 rounded-md p-6 relative mt-8">
+          <div
+            class="absolute -top-4 left-4 bg-white px-2 text-lg font-semibold text-gray-700"
+          >
+            Type de Rubrique
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-col space-y-2">
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="typeFixe"
+                  formControlName="typeRubrique"
+                  value="fixe"
+                  class="mr-2"
+                />
+                <label for="typeFixe" class="text-sm font-medium text-gray-700">
+                  Fixe
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="typeVariable"
+                  formControlName="typeRubrique"
+                  value="variable"
+                  class="mr-2"
+                />
+                <label
+                  for="typeVariable"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Variable
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="typeCalculee"
+                  formControlName="typeRubrique"
+                  value="calculee"
+                  class="mr-2"
+                />
+                <label
+                  for="typeCalculee"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Calculée
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="typeAutre"
+                  formControlName="typeRubrique"
+                  value="autre"
+                  class="mr-2"
+                />
+                <label
+                  for="typeAutre"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Autre
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Mode de Calcul -->
+        <div class="border border-gray-300 rounded-md p-6 relative mt-8">
+          <div
+            class="absolute -top-4 left-4 bg-white px-2 text-lg font-semibold text-gray-700"
+          >
+            Mode de Calcul
+          </div>
+
+          <div class="space-y-6">
+            <div class="flex flex-col space-y-2">
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="calculFormule"
+                  formControlName="modeCalcul"
+                  value="formule"
+                  class="mr-2"
+                />
+                <label
+                  for="calculFormule"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Formule de calcul
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="calculBase"
+                  formControlName="modeCalcul"
+                  value="base"
+                  class="mr-2"
+                />
+                <label
+                  for="calculBase"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Calcul d'une base
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="calculTest"
+                  formControlName="modeCalcul"
+                  value="test"
+                  class="mr-2"
+                />
+                <label
+                  for="calculTest"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Tester Valeur
+                </label>
+              </div>
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+              *ngIf="rubriqueForm.get('modeCalcul')?.value === 'base'"
+            >
+              <!-- Rubrique Base -->
+              <div>
+                <label
+                  for="rubriqueBase"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Rubrique Base
+                </label>
+                <select
+                  id="rubriqueBase"
+                  formControlName="rubriqueBase"
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Sélectionnez une rubrique</option>
+                  <option
+                    *ngFor="let rubrique of rubrique"
+                    [value]="rubrique.id"
+                  >
+                    {{ rubrique.code }} - {{ rubrique.nom }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Rubrique Taux -->
+              <div>
+                <label
+                  for="rubriqueTaux"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Rubrique Taux
+                </label>
+                <select
+                  id="rubriqueTaux"
+                  formControlName="rubriqueTaux"
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Sélectionnez une rubrique</option>
+                  <option
+                    *ngFor="let rubrique of rubrique"
+                    [value]="rubrique.id"
+                  >
+                    {{ rubrique.code }} - {{ rubrique.nom }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="rubriqueForm.get('modeCalcul')?.value === 'formule'">
+              <button
+                type="button"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Ouvrir l'éditeur de formule
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Nature et Cumul -->
+        <div class="border border-gray-300 rounded-md p-6 relative mt-8">
+          <div
+            class="absolute -top-4 left-4 bg-white px-2 text-lg font-semibold text-gray-700"
+          >
+            Nature et Cumul
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Nature de la Rubrique -->
+            <div class="space-y-4">
+              <label class="block text-sm font-medium text-gray-700"
+                >Nature de la Rubrique</label
+              >
+              <div class="flex flex-col space-y-2">
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="natureGain"
+                    formControlName="nature"
+                    value="gain"
+                    class="mr-2"
+                  />
+                  <label
+                    for="natureGain"
+                    class="text-sm font-medium text-gray-700"
+                  >
+                    Gain
+                  </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="natureRetenue"
+                    formControlName="nature"
+                    value="retenue"
+                    class="mr-2"
+                  />
+                  <label
+                    for="natureRetenue"
+                    class="text-sm font-medium text-gray-700"
+                  >
+                    Retenue
+                  </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="natureAucun"
+                    formControlName="nature"
+                    value="aucun"
+                    class="mr-2"
+                  />
+                  <label
+                    for="natureAucun"
+                    class="text-sm font-medium text-gray-700"
+                  >
+                    Aucun
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cumul -->
+            <div class="space-y-4">
+              <label class="block text-sm font-medium text-gray-700"
+                >Cumul Gain / Retenue</label
+              >
+              <div class="flex flex-col space-y-2">
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="cumulOui"
+                    formControlName="cumul"
+                    value="oui"
+                    class="mr-2"
+                  />
+                  <label
+                    for="cumulOui"
+                    class="text-sm font-medium text-gray-700"
+                  >
+                    Oui
+                  </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="cumulNon"
+                    formControlName="cumul"
+                    value="non"
+                    class="mr-2"
+                  />
+                  <label
+                    for="cumulNon"
+                    class="text-sm font-medium text-gray-700"
+                  >
+                    Non
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: Part Salariale / Patronale -->
+        <div class="border border-gray-300 rounded-md p-6 relative mt-8">
+          <div
+            class="absolute -top-4 left-4 bg-white px-2 text-lg font-semibold text-gray-700"
+          >
+            Part Salariale / Patronale
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-col space-y-2">
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="partSalariale"
+                  formControlName="part"
+                  value="salariale"
+                  class="mr-2"
+                />
+                <label
+                  for="partSalariale"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Salariale
+                </label>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="partPatronale"
+                  formControlName="part"
+                  value="patronale"
+                  class="mr-2"
+                />
+                <label
+                  for="partPatronale"
+                  class="text-sm font-medium text-gray-700"
+                >
+                  Patronale
+                </label>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="arrondi"
+                  formControlName="arrondi"
+                  class="mr-2"
+                />
+                <label for="arrondi" class="text-sm font-medium text-gray-700">
+                  Arrondi
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Panneau droit avec système d'onglets -->
+  <div class="px-6 pb-6 col-span-1">
+    <!-- Navigation par onglets -->
+    <div class="flex border-b border-gray-300">
+      <button
+        type="button"
+        class="px-4 py-2 font-medium"
+        [ngClass]="{
+          'border-b-2 border-blue-500 text-blue-600': activeTab === 'bases',
+          'text-gray-500 hover:text-gray-700': activeTab !== 'bases',
+        }"
+        (click)="activeTab = 'bases'"
+      >
+        Bases / Modèle bulletin
+      </button>
+
+      <button
+        type="button"
+        class="px-4 py-2 font-medium"
+        [ngClass]="{
+          'border-b-2 border-blue-500 text-blue-600': activeTab === 'reclasser',
+          'text-gray-500 hover:text-gray-700': activeTab !== 'reclasser',
+        }"
+        (click)="activeTab = 'reclasser'"
+      >
+        Rubriques à reclasser
+      </button>
+
+      <button
+        type="button"
+        class="px-4 py-2 font-medium"
+        [ngClass]="{
+          'border-b-2 border-blue-500 text-blue-600': activeTab === 'notes',
+          'text-gray-500 hover:text-gray-700': activeTab !== 'notes',
+        }"
+        (click)="activeTab = 'notes'"
+      >
+        Bloc-notes
+      </button>
+    </div>
+
+    <!-- Contenu de l'onglet "Bases / Modèle bulletin" -->
+    <div *ngIf="activeTab === 'bases'" class="mt-4">
+      <!-- Section Bases et Modèle Bulletin côte à côte -->
+      <div class="flex flex-row space-x-4">
+        <!-- Section Bases -->
+        <div class="flex-1">
+          <h3 class="text-lg font-medium text-gray-700 mb-2">Bases</h3>
+          <div class="border border-gray-300 rounded-md overflow-hidden">
+            <table class="w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    class="px-3 py-2 text-left text-xs font-medium text-gray-500"
+                  >
+                    Code
+                  </th>
+                  <th
+                    class="px-3 py-2 text-left text-xs font-medium text-gray-500"
+                  >
+                    Base
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-300">
+                <tr
+                  *ngFor="let base of bases"
+                  (click)="selectBase(base)"
+                  [class.bg-blue-100]="isBaseSelected(base)"
+                  class="cursor-pointer hover:bg-gray-50"
+                >
+                  <td class="px-3 py-2 text-sm">{{ base.code }}</td>
+                  <td class="px-3 py-2 text-sm">{{ base.libelle }}</td>
+
+                  <!-- Display "X" if the base is selected and exists in rubriqueBase -->
+                  <td
+                    *ngIf="isBaseInRubrique(base) || isBaseSelected(base)"
+                    class="px-3 py-2 text-sm"
+                  >
+                    X
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section Modèle Bulletin -->
+        <div class="flex-1">
+          <h3 class="text-lg font-medium text-gray-700 mb-2">
+            Modèle Bulletin
+          </h3>
+          <div class="border border-gray-300 rounded-md overflow-hidden">
+            <table class="w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    class="px-3 py-2 text-left text-xs font-medium text-gray-500"
+                  >
+                    Code
+                  </th>
+                  <th
+                    class="px-3 py-2 text-left text-xs font-medium text-gray-500"
+                  >
+                    Modèle Bulletin
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-300">
+                <tr
+                  *ngFor="let modele of modelesBulletin"
+                  (click)="selectModele(modele)"
+                  [class.bg-blue-50]="selectedModele?.id === modele.id"
+                  class="cursor-pointer hover:bg-gray-50"
+                >
+                  <td class="px-3 py-2 text-sm">{{ modele.code }}</td>
+                  <td class="px-3 py-2 text-sm">{{ modele.libelle }}</td>
+
+                  <td
+                    *ngIf="
+                      isModeleInRubrique(modele) || isModeleSelected(modele)
+                    "
+                    class="px-3 py-2 text-sm"
+                  >
+                    X
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu de l'onglet "Rubriques à reclasser" -->
+    <div *ngIf="activeTab === 'reclasser'" class="mt-4">
+      <div class="p-4 border border-gray-300 rounded-md">
+        <h3 class="text-lg font-medium text-gray-700 mb-4">
+          Rubriques à reclasser
+        </h3>
+        <!-- Contenu à implémenter selon les besoins -->
+        <p class="text-gray-500 italic">Fonctionnalité à venir</p>
+      </div>
+    </div>
+
+    <!-- Contenu de l'onglet "Bloc-notes" -->
+    <div *ngIf="activeTab === 'notes'" class="mt-4">
+      <div class="p-4 border border-gray-300 rounded-md">
+        <h3 class="text-lg font-medium text-gray-700 mb-2">Notes</h3>
+        <textarea
+          formControlName="notes"
+          rows="8"
+          class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ajouter vos notes ici..."
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="flex justify-between mt-6">
+      <div class="flex space-x-4">
+        <!-- Sauvegarder Button with Icon -->
+        <button
+          (click)="onSubmit()"
+          type="button"
+          class="px-5 py-3 border border-gray-300 rounded-md text-lg font-medium text-white bg-green-500 hover:bg-green-600 flex items-center space-x-3 transition-all duration-300"
+        >
+          <fa-icon [icon]="faSave" class="text-white w-5 h-5"></fa-icon>
+          <span>Sauvegarder</span>
+        </button>
+
+        <!-- Supprimer Button with Icon -->
+        <button
+          *ngIf="isEditMode"
+          (click)="deleteRubrique()"
+          type="button"
+          class="px-5 py-3 border border-gray-300 rounded-md text-lg font-medium text-white bg-red-500 hover:bg-red-600 flex items-center space-x-3 transition-all duration-300"
+        >
+          <fa-icon [icon]="faTrashAlt" class="text-white w-5 h-5"></fa-icon>
+          <span>Supprimer</span>
+        </button>
+
+        <!-- Fermer Button with Icon -->
+        <button
+          (click)="goBack()"
+          type="button"
+          class="px-5 py-3 border border-gray-300 rounded-md text-lg font-medium text-white bg-gray-500 hover:bg-gray-600 flex items-center space-x-3 transition-all duration-300"
+        >
+          <fa-icon [icon]="faTimes" class="text-white w-5 h-5"></fa-icon>
+          <span>Fermer</span>
+        </button>
+      </div>
+
+      <div class="flex space-x-2">
+        <button
+          type="button"
+          class="px-2 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+        >
+          &lt;
+        </button>
+        <button
+          type="button"
+          class="px-2 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+        >
+          &gt;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

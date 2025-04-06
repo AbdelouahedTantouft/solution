@@ -1,14 +1,15 @@
 import {
   BaseComponent
-} from "./chunk-3LCXQ34I.js";
-import "./chunk-Y2PSS63T.js";
+} from "./chunk-LG6HVRWD.js";
+import "./chunk-CPQ54NU6.js";
 import {
   BaseStyle
-} from "./chunk-Q77E5R7Y.js";
+} from "./chunk-BHSVSA2K.js";
+import "./chunk-HPJ7G2KL.js";
 import {
   PrimeTemplate,
   SharedModule
-} from "./chunk-XGDFQIFK.js";
+} from "./chunk-5LO3NCPH.js";
 import {
   addClass,
   getHeight,
@@ -19,7 +20,6 @@ import {
   isRTL,
   removeClass
 } from "./chunk-XQWLMVU4.js";
-import "./chunk-HPJ7G2KL.js";
 import "./chunk-F66ERJZA.js";
 import {
   CommonModule,
@@ -29,7 +29,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-UMAXZX7C.js";
+} from "./chunk-4THGAS2G.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -80,11 +80,11 @@ import {
   ɵɵstyleMap,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-SAS3ZIMR.js";
-import "./chunk-5OPE3T2R.js";
+} from "./chunk-FCPBNRVL.js";
 import "./chunk-4N4GOYJH.js";
+import "./chunk-5OPE3T2R.js";
 import "./chunk-FHTVLBLO.js";
-import "./chunk-WDMUDEB6.js";
+import "./chunk-3OV72XIM.js";
 
 // node_modules/primeng/fesm2022/primeng-splitter.mjs
 var theme = ({

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 interface DatabaseRecord {
   year: string;
@@ -8,36 +8,52 @@ interface DatabaseRecord {
   companyName: string;
   databaseName: string;
   newDatabaseName: string;
-  status: 'valid' | 'invalid' | 'pending';
+  status: "valid" | "invalid" | "pending";
 }
 
 @Component({
-  selector: 'app-database-management',
+  selector: "app-database-management",
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './annual-treatment.component.html',
-  styleUrls: ['./annual-treatment.component.scss']
+  templateUrl: "./annual-treatment.component.html",
+  styleUrls: ["./annual-treatment.component.scss"],
 })
 export class AnnualTreatmentComponent implements OnInit {
   databaseRecords: DatabaseRecord[] = [
     {
-      year: '2023',
-      code: '01',
-      companyName: 'TEST EAT',
-      databaseName: 'CLOEB_PAIE_2023',
-      newDatabaseName: '',
-      status: 'valid'
-    }
+      year: "2023",
+      code: "01",
+      companyName: "TEST EAT",
+      databaseName: "CLOEB_PAIE_2023",
+      newDatabaseName: "",
+      status: "valid",
+    },
+    {
+      year: "2023",
+      code: "01",
+      companyName: "TEST EAT",
+      databaseName: "CLOEB_PAIE_2023",
+      newDatabaseName: "",
+      status: "valid",
+    },
   ];
-  
-  processStatus: 'in-progress' | 'completed' | 'failed' = 'completed';
-  searchTerm: string = '';
-  activeTab: string = 'annual-closing';
+
+  processStatus: "in-progress" | "completed" | "failed" = "completed";
+  searchTerm: string = "";
+  activeTab: string = "annual-closing";
 
   tabs = [
-    { id: 'annual-closing', label: 'Traitement clôture annuelle', icon: 'file-text' },
-    { id: 'process-status', label: 'Traitement terminé', icon: 'check-circle' },
-    { id: 'database-verification', label: 'Vérification les noms des bases de données', icon: 'database' }
+    {
+      id: "annual-closing",
+      label: "Traitement clôture annuelle",
+      icon: "file-text",
+    },
+    { id: "process-status", label: "Traitement terminé", icon: "check-circle" },
+    {
+      id: "database-verification",
+      label: "Vérification les noms des bases de données",
+      icon: "database",
+    },
   ];
 
   constructor() {}
@@ -51,19 +67,23 @@ export class AnnualTreatmentComponent implements OnInit {
   }
 
   exportData(): void {
-    console.log('Exporting data');
+    console.log("Exporting data");
   }
 
   addNewRecord(): void {
-    console.log('Adding new record');
+    console.log("Adding new record");
   }
 
   getStatusText(status: string): string {
-    switch(status) {
-      case 'valid': return 'Valide';
-      case 'invalid': return 'Invalide';
-      case 'pending': return 'En attente';
-      default: return '';
+    switch (status) {
+      case "valid":
+        return "Valide";
+      case "invalid":
+        return "Invalide";
+      case "pending":
+        return "En attente";
+      default:
+        return "";
     }
   }
 }
