@@ -12,6 +12,8 @@ import { CalculPaieComponent } from "./app/pages/calcul-paie/calcul-paie.compone
 import { PaysVillesComponent } from "./app/pages/pays-villes/pays-villes.component";
 import { AnnualTreatmentComponent } from "./app/pages/Cloture/annual-treatment/annual-treatment.component";
 import { RubriqueAddComponent } from "./app/pages/rubriques/rubrique-add/rubrique-add.component";
+import { PayrollEditionComponent } from "./app/pages/payroll-edition/payroll-edition.component";
+import { LoanManagementComponent } from "./app/pages/loan-management/loan-management.component";
 
 export const appRoutes: Routes = [
   {
@@ -31,9 +33,10 @@ export const appRoutes: Routes = [
   { path: "importation-var", component: ImportationVarComponent },
   { path: "fiche-salarie", component: FicheSalarieComponent },
   { path: "landing", component: Landing },
+  { path: "loan-management", component: LoanManagementComponent },
+
   { path: "annual-treatment", component: AnnualTreatmentComponent },
   { path: "rubrique-add", component: RubriqueAddComponent },
-
   { path: "notfound", component: Notfound },
   { path: "auth", loadChildren: () => import("./app/pages/auth/auth.routes") },
   { path: "", component: CompanyListComponent },

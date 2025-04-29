@@ -1,13 +1,13 @@
 import {
   BaseStyle
-} from "./chunk-BHSVSA2K.js";
+} from "./chunk-6Z5CLJNV.js";
+import {
+  FilterMatchMode
+} from "./chunk-5LO3NCPH.js";
 import {
   config_default,
   service_default
 } from "./chunk-HPJ7G2KL.js";
-import {
-  FilterMatchMode
-} from "./chunk-5LO3NCPH.js";
 import {
   DOCUMENT
 } from "./chunk-4THGAS2G.js";
@@ -340,4 +340,4 @@ export {
   PRIME_NG_CONFIG,
   providePrimeNG
 };
-//# sourceMappingURL=chunk-CPQ54NU6.js.map
+//# sourceMappingURL=chunk-ZW7BVOSE.js.map
