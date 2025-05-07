@@ -1,0 +1,101 @@
+<!-- stepper.component.html -->
+<div class="w-full">
+  <!-- Mobile Stepper (Horizontal Progress Bar) -->
+  <div class="md:hidden mb-6">
+    <div class="flex justify-between items-center mb-2">
+      <span class="text-sm font-medium text-primary-marine"
+        >Step {{ currentStep }} of {{ totalSteps }}</span
+      >
+      <span class="text-sm text-neutral-cool-gray">{{
+        stepTitles[currentStep - 1]
+      }}</span>
+    </div>
+    <div class="w-full bg-neutral-light-gray rounded-full h-2">
+      <div
+        class="bg-primary-purplish-blue h-2 rounded-full transition-all duration-300 ease-in-out"
+        [style.width]="(currentStep / totalSteps) * 100 + '%'"
+      ></div>
+    </div>
+  </div>
+
+ <!-- Enhanced Horizontal Stepper -->
+<div class="flex flex-row items-center justify-center w-full py-8 px-4 max-w-4xl mx-auto">
+  <ng-container *ngFor="let step of stepTitles; let i = index">
+    <!-- Step Container -->
+    <div class="flex flex-col items-center flex-1 relative">
+      <!-- Step Circle with Animations -->
+      <div
+        class="relative z-10 transition-all duration-300 ease-in-out transform"
+        [ngClass]="{'scale-110': currentStep === i + 1}"
+      >
+        <!-- Outer Circle -->
+        <div 
+          class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-md relative"
+          [ngClass]="{
+            'bg-blue-500 text-white': currentStep > i + 1,
+            'bg-blue-600 text-white ring-4 ring-blue-200': currentStep === i + 1,
+            'bg-gray-100 text-gray-500 border-2 border-gray-300': currentStep < i + 1
+          }"
+        >
+          <!-- Step Icon/Number -->
+          <div class="transition-all duration-300 ease-in-out">
+            <svg *ngIf="currentStep > i + 1" class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span *ngIf="currentStep <= i + 1" class="text-base font-bold">{{ i + 1 }}</span>
+          </div>
+          
+          <!-- Pulse Effect for Current Step -->
+          <div *ngIf="currentStep === i + 1" class="absolute w-full h-full rounded-full animate-ping bg-blue-400 opacity-30"></div>
+        </div>
+      </div>
+
+      <!-- Step Text with Better Typography -->
+      <div class="mt-3 text-center transition-all duration-300">
+        <div 
+          class="text-xs uppercase tracking-wider font-medium mb-1"
+          [ngClass]="{
+            'text-gray-400': currentStep < i + 1,
+            'text-blue-600 font-semibold': currentStep === i + 1,
+            'text-blue-500': currentStep > i + 1
+          }"
+        >
+          STEP {{ i + 1 }}
+        </div>
+        <div 
+          class="text-sm font-bold transition-all duration-300 hidden md:block"
+          [ngClass]="{
+            'text-gray-500': currentStep < i + 1,
+            'text-gray-800': currentStep === i + 1,
+            'text-gray-700': currentStep > i + 1
+          }"
+        >
+          {{ step }}
+        </div>
+      </div>
+
+      <!-- Connector Line with Animation -->
+      <div 
+        *ngIf="i !== stepTitles.length - 1" 
+        class="absolute top-6 left-1/2 h-[3px] w-full"
+      >
+        <div 
+          class="h-full transition-all duration-500 ease-in-out"
+          [ngClass]="{
+            'bg-blue-500': currentStep > i + 1,
+            'bg-gray-300': currentStep <= i + 1
+          }"
+          [ngStyle]="{'width': currentStep > i + 1 ? '100%' : '0%'}"
+        ></div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Optional Mobile Indicator -->
+<div class="md:hidden text-center mt-2 text-sm font-medium text-gray-600">
+  Step {{ currentStep }} of {{ stepTitles.length }}: <span class="text-blue-600 font-semibold">{{ stepTitles[currentStep-1] }}</span>
+</div>
+
+
+</div>

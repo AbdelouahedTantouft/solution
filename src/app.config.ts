@@ -9,6 +9,7 @@ import { appRoutes } from './app.routes';
 
 
 import { definePreset } from "@primeng/themes";
+import { provideStore } from '@ngrx/store';
 
 const MyPreset = definePreset(Aura, {
     primitive: {
@@ -5234,9 +5235,10 @@ const MyPreset = definePreset(Aura, {
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideRouter(appRoutes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation()),
-        provideHttpClient(withFetch()),
-        provideAnimationsAsync(),
-        providePrimeNG({ theme: { preset: MyPreset, options: { darkModeSelector: '.app-dark' } } })
-    ]
+    provideRouter(appRoutes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation()),
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+    providePrimeNG({ theme: { preset: MyPreset, options: { darkModeSelector: '.app-dark' } } }),
+    provideStore()
+]
 };

@@ -3,3 +3,29 @@
 @use './assets/layout/layout.scss';
 @use 'primeicons/primeicons.css';
 @use './assets/demo/demo.scss';
+
+/* Global Tailwind styles for the tab links */
+.tab-link {
+      @apply inline-block px-4 py-2 rounded-md text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-all duration-200;
+    }
+    
+    /* When active tab */
+    .active-tab {
+      @apply bg-blue-500 text-white font-semibold;
+    }
+  
+    
+    :root {
+      --color-primary-marine: "hsl(213, 96%, 18%)";
+      --color-primary-purplish-blue: "hsl(243, 100%, 62%)";
+      --color-primary-pastel-blue: "hsl(228, 100%, 84%)";
+      --color-primary-light-blue: "hsl(206, 94%, 87%)";
+      --color-primary-strawberry-red: "hsl(354, 84%, 57%)";
+    
+      --color-neutral-cool-gray: "hsl(231, 11%, 63%)";
+      --color-neutral-light-gray: "hsl(229, 24%, 87%)";
+      --color-neutral-magnolia: "hsl(217, 100%, 97%)";
+      --color-neutral-alabaster: "hsl(231, 100%, 99%)";
+      --color-neutral-white: "hsl(0, 0%, 100%)";
+    }
+    

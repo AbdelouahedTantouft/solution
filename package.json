@@ -24,9 +24,12 @@
     "@fortawesome/fontawesome-free": "6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@ngrx/store": "^19.1.0",
     "@primeng/themes": "^19.0.5",
+    "@wlucha/ng-country-select": "^2.2.0",
     "angular-datatables": "^19.0.0",
     "chart.js": "4.4.2",
+    "country-state-city": "^3.2.1",
     "datatables.net": "^2.2.2",
     "datatables.net-dt": "^2.2.2",
     "jquery": "^3.7.1",
@@ -37,7 +40,9 @@
     "tailwindcss-primeui": "^0.3.2",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+    "@angular/material": "^19.0.0",
+    "flag-icons": "^7.3.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.6",

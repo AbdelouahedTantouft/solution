@@ -14,6 +14,10 @@ import { PaysVillesComponent } from "./pays-villes/pays-villes.component";
 import { AnnualTreatmentComponent } from "./Cloture/annual-treatment/annual-treatment.component";
 import { RubriqueAddComponent } from "./rubriques/rubrique-add/rubrique-add.component";
 import { RubriqueViewComponent } from "./rubriques/rubrique-view/rubrique-view.component";
+import { ListSalrieComponent } from "./salarie/list-salrie/list-salrie.component";
+import { EtatCivilComponent } from "./salarie/etat-civil/etat-civil.component";
+import { ContractTravailComponent } from "./salarie/contract-travail/contract-travail.component";
+import { SalarieFormComponent } from "./salarie/salarie-form/salarie-form.component";
 
 export default [
   { path: "pays-ville", component: PaysVillesComponent },
@@ -32,5 +36,17 @@ export default [
   { path: "rubriques/rubrique-list", component: RubriqueAddComponent },
   { path: "rubriques/view-item/:code", component: RubriqueViewComponent },
   { path: "rubriques/add-item", component: RubriqueViewComponent },
-  { path: "**", redirectTo: "/notfound" },
+  //{ path: "salarie/add-salarie", component: SalarieFormComponent },
+  {
+    path: "fiche-salarie",
+    component: FicheSalarieComponent,
+    children: [
+      { path: "", redirectTo: "liste-salaries", pathMatch: "full" },
+      { path: "liste-salaries", component: ListSalrieComponent },
+      { path: "etat-civil", component: EtatCivilComponent },
+      { path: "contrat-travail", component: ContractTravailComponent },
+      { path: 'add-salarie', component: SalarieFormComponent }
+      
+    ],
+  },
 ] as Routes;

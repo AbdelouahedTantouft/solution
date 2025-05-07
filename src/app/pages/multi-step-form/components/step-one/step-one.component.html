@@ -1,0 +1,98 @@
+<div class="animate-fade-in">
+      <h1 class="text-2xl md:text-3xl font-bold text-primary-marine mb-2">
+        Personal info
+      </h1>
+      <p class="text-neutral-cool-gray mb-6">
+        Please provide your name, email address, and phone number.
+      </p>
+    
+      <div [formGroup]="formGroup" class="space-y-4">
+        <!-- Name Field -->
+        <div>
+          <div class="flex justify-between">
+            <label
+              for="name"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Name</label
+            >
+            <span
+              *ngIf="formErrors.name && formGroup.get('name')?.touched"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.name }}</span
+            >
+          </div>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="e.g. Stephen King"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
+            [ngClass]="{ 'border-primary-strawberry-red': formErrors.name && formGroup.get('name')?.touched }"
+          />
+        </div>
+    
+        <!-- Email Field -->
+        <div>
+          <div class="flex justify-between">
+            <label
+              for="email"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Email Address</label
+            >
+            <span
+              *ngIf="formErrors.email && formGroup.get('email')?.touched"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.email }}</span
+            >
+          </div>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="e.g. stephenking@lorem.com"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
+            [ngClass]="{
+              'border-primary-strawberry-red': formErrors.email && formGroup.get('email')?.touched
+            }"
+          />
+        </div>
+    
+        <!-- Phone Field -->
+        <div>
+          <div class="flex justify-between">
+            <label
+              for="phone"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Phone Number</label
+            >
+            <span
+              *ngIf="formErrors.phone && formGroup.get('phone')?.touched"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.phone }}</span
+            >
+          </div>
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            placeholder="e.g. +1 234 567 890"
+            class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
+            [ngClass]="{
+              'border-primary-strawberry-red': formErrors.phone && formGroup.get('phone')?.touched
+            }"
+          />
+        </div>
+      </div>
+    
+      <!-- Navigation Buttons -->
+      <div class="mt-auto pt-10 flex justify-between">
+        <div></div> <!-- Empty div for alignment -->
+        <button
+          type="button"
+          (click)="onNext()"
+          class="ml-auto bg-primary-marine text-white px-5 py-2.5 rounded-lg hover:bg-primary-marine-dark transition-colors"
+        >
+          Next Step
+        </button>
+      </div>
+    </div>

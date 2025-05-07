@@ -1,0 +1,621 @@
+<div class="container mx-auto p-4">
+  <form
+    [formGroup]="employeeForm"
+    (ngSubmit)="onSubmit()"
+    class="bg-white rounded-md shadow-md"
+  >
+    <!-- Two column layout -->
+    <div class="flex flex-col md:flex-row">
+      <!-- Left Column -->
+      <div class="w-full md:w-1/2 p-4 border-r border-gray-200">
+        <!-- Position Section -->
+        <div class="mb-6">
+          <h2 class="text-xl font-medium text-gray-700 mb-4">Poste</h2>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Fonction</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="fonction"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('fonction')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('fonction')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <button
+                      (click)="togglePanel('fonction')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Catégorie</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="categorie"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('categorie')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('categorie')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <button
+                      (click)="togglePanel('categorie')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Service</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="service"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('service')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('service')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <button
+                      (click)="togglePanel('service')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Site</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="site"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('site')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('site')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Site</h3>
+                    <button
+                      (click)="togglePanel('site')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Establishment Section -->
+        <div class="mb-6">
+          <h2 class="text-xl font-medium text-gray-700 mb-4">Établissement</h2>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Filiale</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="filiale"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('filiale')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('filiale')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <button
+                      (click)="togglePanel('filiale')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Pôle</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="pole"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('pole')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('pole')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <button
+                      (click)="togglePanel('pole')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employment Section -->
+        <div class="mb-6">
+          <h2 class="text-xl font-medium text-gray-700 mb-4">Emploi</h2>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Catégorie sociopro</label
+            >
+            <div class="flex">
+              <div
+                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
+              ></div>
+              <div class="w-3/4 relative">
+                <input
+                  type="text"
+                  formControlName="categorieSociopro"
+                  class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <!-- 🔍 Button -->
+                <button
+                  type="button"
+                  class="absolute right-2 top-2 text-blue-500"
+                  (click)="togglePanel('categorieSociopro')"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+
+                <div
+                  *ngIf="isPanelOpen('categorieSociopro')"
+                  class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
+                >
+                  <div
+                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
+                  >
+                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <button
+                      (click)="togglePanel('categorieSociopro')"
+                      class="text-lg font-bold text-gray-700"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="p-4 max-h-40 overflow-y-auto">
+                    <ul>
+                      <li
+                        *ngFor="let option of options"
+                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
+                        (click)="selectOption(option)"
+                      >
+                        {{ option }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="w-full md:w-1/2 p-4">
+        <!-- Contract Section -->
+        <div class="mb-6">
+          <h2 class="text-xl font-medium text-gray-700 mb-4">
+            Contrat de travail
+          </h2>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Date d'embauche</label
+            >
+            <input
+              type="text"
+              formControlName="dateEmbauche"
+              placeholder="__/__/____"
+              class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Période d'essai (Mois)</label
+            >
+            <input
+              type="text"
+              formControlName="periodeEssai"
+              class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Date de confirmation poste</label
+            >
+            <div class="flex gap-2">
+              <input
+                type="text"
+                formControlName="dateConfirmationPoste"
+                placeholder="__/__/____"
+                class="w-3/5 border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                class="w-2/5 bg-gray-200 text-gray-700 p-2 rounded-md flex items-center justify-center gap-2"
+              >
+                <span>Tableau ancienneté des salariés</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Nature de contrat</label
+            >
+            <div class="flex gap-2">
+              <select
+                formControlName="natureContrat"
+                class="w-3/5 border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Sélectionner</option>
+                <option
+                  *ngFor="let option of contractTypeOptions"
+                  [value]="option"
+                >
+                  {{ option }}
+                </option>
+              </select>
+              <button
+                type="button"
+                class="w-2/5 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center gap-2"
+              >
+                <i class="fas fa-file-contract"></i>
+                <span>Contrat</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Date de début</label
+            >
+            <input
+              type="text"
+              formControlName="dateDebut"
+              placeholder="__/__/____"
+              class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Date de Fin</label
+            >
+            <input
+              type="text"
+              formControlName="dateFin"
+              placeholder="__/__/____"
+              class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-600 mb-1"
+              >Statut</label
+            >
+            <div class="mt-2">
+              <div class="flex items-center mb-2">
+                <input
+                  type="radio"
+                  id="permanent"
+                  formControlName="statut"
+                  value="Permanent"
+                  class="mr-2"
+                />
+                <label for="permanent">Permanent</label>
+              </div>
+              <div class="flex items-center mb-2">
+                <input
+                  type="radio"
+                  id="stagiaire"
+                  formControlName="statut"
+                  value="Stagiaire"
+                  class="mr-2"
+                />
+                <label for="stagiaire">Stagiaire</label>
+              </div>
+              <div class="flex items-center mb-2">
+                <input
+                  type="radio"
+                  id="occasionnel"
+                  formControlName="statut"
+                  value="Occasionnel"
+                  class="mr-2"
+                />
+                <label for="occasionnel">Occasionnel</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="temporaire"
+                  formControlName="statut"
+                  value="Temporaire"
+                  class="mr-2"
+                />
+                <label for="temporaire">Temporaire</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Departure Section -->
+        <div class="mb-6">
+          <h2 class="text-xl font-medium text-gray-700 mb-4">Départ</h2>
+
+          <div class="mb-3 flex gap-4">
+            <div class="w-1/2">
+              <label class="block text-sm font-medium text-gray-600 mb-1"
+                >Date de départ</label
+              >
+              <input
+                type="text"
+                formControlName="dateDepart"
+                placeholder="__/__/____"
+                class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div class="w-1/2">
+              <label class="block text-sm font-medium text-gray-600 mb-1"
+                >Motif de départ</label
+              >
+              <div class="relative">
+                <select
+                  formControlName="motifDepart"
+                  class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Sélectionner</option>
+                  <option
+                    *ngFor="let option of departureReasonOptions"
+                    [value]="option"
+                  >
+                    {{ option }}
+                  </option>
+                </select>
+                <div class="absolute right-0 top-0 h-full flex items-center">
+                  <div
+                    class="bg-gray-700 h-full flex items-center justify-center px-4 rounded-r-md"
+                  >
+                    <i class="fas fa-camera text-white"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex justify-end p-4 border-t border-gray-200">
+      <button
+        type="submit"
+        class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>

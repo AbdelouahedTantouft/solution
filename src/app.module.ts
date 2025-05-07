@@ -3,6 +3,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { RouterModule } from "@angular/router"; // Import RouterModule pour les routes
 import { appRoutes } from "./app.routes"; // Import de votre fichier de routes
+import { StoreModule } from "@ngrx/store";
+import { salarieFormReducer } from "./app/core/state/salarie-form/salarie-form.reducer";
 
 // Modules PrimeNG
 import { DropdownModule } from "primeng/dropdown";
@@ -45,6 +47,7 @@ import { DataTablesModule } from "angular-datatables";
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes), // Configuration des routes
+    StoreModule.forRoot({ salarieForm: salarieFormReducer }) // Global State Config
     FormsModule, // Pour ngModel
     ReactiveFormsModule, // Pour les formulaires réactifs
     DropdownModule, // Module PrimeNG pour dropdown
