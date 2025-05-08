@@ -1,8 +1,8 @@
 <div class="container mx-auto p-4">
   <form
     [formGroup]="employeeForm"
-    (ngSubmit)="onSubmit()"
-    class="bg-white rounded-md shadow-md"
+    (ngSubmit)="onSaveAndContinue()"
+    class="bg-white rounded-md shadow-md p-4"
   >
     <!-- Two column layout -->
     <div class="flex flex-col md:flex-row">
@@ -22,6 +22,9 @@
               ></div>
               <div class="w-3/4 relative">
                 <input
+                  [(ngModel)]="searchInputs['fonction'].value"
+                  (input)="filterOptions('fonction')"
+                  (focus)="openPanel('fonction')"
                   type="text"
                   formControlName="fonction"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -43,7 +46,7 @@
                   <div
                     class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
                   >
-                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <h3 class="text-sm font-semibold">fonction</h3>
                     <button
                       (click)="togglePanel('fonction')"
                       class="text-lg font-bold text-gray-700"
@@ -55,9 +58,9 @@
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
-                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        *ngFor="let option of searchInputs.fonction.filtered"
+                        (click)="selectOption('fonction', option)"
+                        class="px-2 py-1 hover:bg-blue-100 cursor-pointer"
                       >
                         {{ option }}
                       </li>
@@ -67,21 +70,23 @@
               </div>
             </div>
           </div>
-
           <div class="mb-3">
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Catégorie</label
-            >
+            <label class="block text-sm font-medium text-gray-600 mb-1">
+              Catégorie
+            </label>
             <div class="flex">
-              <div
-                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
-              ></div>
+              <div class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"></div>
               <div class="w-3/4 relative">
                 <input
+                  [(ngModel)]="searchInputs['categorie'].value"
+                  (input)="filterOptions('categorie')"
+                  (focus)="openPanel('categorie')"
                   type="text"
                   formControlName="categorie"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Catégorie"
                 />
+          
                 <!-- 🔍 Button -->
                 <button
                   type="button"
@@ -90,15 +95,14 @@
                 >
                   <i class="fas fa-search"></i>
                 </button>
-
+          
+                <!-- Filtered Results -->
                 <div
                   *ngIf="isPanelOpen('categorie')"
                   class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
                 >
-                  <div
-                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
-                  >
-                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                  <div class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b">
+                    <h3 class="text-sm font-semibold">Catégorie</h3>
                     <button
                       (click)="togglePanel('categorie')"
                       class="text-lg font-bold text-gray-700"
@@ -106,13 +110,13 @@
                       ×
                     </button>
                   </div>
-
+          
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
-                        class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        *ngFor="let option of searchInputs['categorie'].filtered"
+                        (click)="selectOption('categorie', option)"
+                        class="px-2 py-1 hover:bg-blue-100 cursor-pointer"
                       >
                         {{ option }}
                       </li>
@@ -122,6 +126,8 @@
               </div>
             </div>
           </div>
+          
+          
 
           <div class="mb-3">
             <label class="block text-sm font-medium text-gray-600 mb-1"
@@ -135,6 +141,8 @@
                 <input
                   type="text"
                   formControlName="service"
+                  [(ngModel)]="searchInputs['service'].value"
+                  (ngModelChange)="onInputChange('service', $event)"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <!-- 🔍 Button -->
@@ -153,7 +161,7 @@
                   <div
                     class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
                   >
-                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <h3 class="text-sm font-semibold">Service</h3>
                     <button
                       (click)="togglePanel('service')"
                       class="text-lg font-bold text-gray-700"
@@ -165,9 +173,9 @@
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
+                        *ngFor="let option of searchInputs['service'].filtered"
                         class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        (click)="selectOption('service', option)"
                       >
                         {{ option }}
                       </li>
@@ -190,8 +198,11 @@
                 <input
                   type="text"
                   formControlName="site"
+                  [(ngModel)]="searchInputs['site'].value"
+                  (ngModelChange)="onInputChange('site', $event)"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+
                 <!-- 🔍 Button -->
                 <button
                   type="button"
@@ -220,9 +231,9 @@
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
+                        *ngFor="let option of searchInputs['site'].filtered"
                         class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        (click)="selectOption('site', option)"
                       >
                         {{ option }}
                       </li>
@@ -234,10 +245,11 @@
           </div>
         </div>
 
-        <!-- Establishment Section -->
+        <!-- Établissement Section -->
         <div class="mb-6">
           <h2 class="text-xl font-medium text-gray-700 mb-4">Établissement</h2>
 
+          <!-- Filiale -->
           <div class="mb-3">
             <label class="block text-sm font-medium text-gray-600 mb-1"
               >Filiale</label
@@ -250,9 +262,10 @@
                 <input
                   type="text"
                   formControlName="filiale"
+                  [(ngModel)]="searchInputs['filiale'].value"
+                  (ngModelChange)="onInputChange('filiale', $event)"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <!-- 🔍 Button -->
                 <button
                   type="button"
                   class="absolute right-2 top-2 text-blue-500"
@@ -268,7 +281,7 @@
                   <div
                     class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
                   >
-                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <h3 class="text-sm font-semibold">Filiale</h3>
                     <button
                       (click)="togglePanel('filiale')"
                       class="text-lg font-bold text-gray-700"
@@ -276,13 +289,12 @@
                       ×
                     </button>
                   </div>
-
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
+                        *ngFor="let option of searchInputs['filiale'].filtered"
                         class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        (click)="selectOption('filiale', option)"
                       >
                         {{ option }}
                       </li>
@@ -293,6 +305,7 @@
             </div>
           </div>
 
+          <!-- Pôle -->
           <div class="mb-3">
             <label class="block text-sm font-medium text-gray-600 mb-1"
               >Pôle</label
@@ -305,9 +318,10 @@
                 <input
                   type="text"
                   formControlName="pole"
+                  [(ngModel)]="searchInputs['pole'].value"
+                  (ngModelChange)="onInputChange('pole', $event)"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <!-- 🔍 Button -->
                 <button
                   type="button"
                   class="absolute right-2 top-2 text-blue-500"
@@ -323,7 +337,7 @@
                   <div
                     class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
                   >
-                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                    <h3 class="text-sm font-semibold">Pôle</h3>
                     <button
                       (click)="togglePanel('pole')"
                       class="text-lg font-bold text-gray-700"
@@ -331,13 +345,12 @@
                       ×
                     </button>
                   </div>
-
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
+                        *ngFor="let option of searchInputs['pole'].filtered"
                         class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        (click)="selectOption('pole', option)"
                       >
                         {{ option }}
                       </li>
@@ -349,25 +362,23 @@
           </div>
         </div>
 
-        <!-- Employment Section -->
+        <!-- Emploi Section -->
         <div class="mb-6">
           <h2 class="text-xl font-medium text-gray-700 mb-4">Emploi</h2>
 
+          <!-- Catégorie sociopro -->
           <div class="mb-3">
-            <label class="block text-sm font-medium text-gray-600 mb-1"
-              >Catégorie sociopro</label
-            >
+            <label class="block text-sm font-medium text-gray-600 mb-1">Catégorie sociopro</label>
             <div class="flex">
-              <div
-                class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"
-              ></div>
+              <div class="w-1/4 bg-gray-100 border border-gray-300 rounded-l-md p-2"></div>
               <div class="w-3/4 relative">
                 <input
                   type="text"
                   formControlName="categorieSociopro"
+                  [(ngModel)]="searchInputs['categorieSociopro'].value"
+                  (ngModelChange)="onInputChange('categorieSociopro', $event)"
                   class="w-full border border-gray-300 p-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <!-- 🔍 Button -->
                 <button
                   type="button"
                   class="absolute right-2 top-2 text-blue-500"
@@ -380,10 +391,8 @@
                   *ngIf="isPanelOpen('categorieSociopro')"
                   class="absolute z-10 top-full mt-2 left-0 w-full border rounded shadow-md bg-white"
                 >
-                  <div
-                    class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b"
-                  >
-                    <h3 class="text-sm font-semibold">Catégorie sociopro</h3>
+                  <div class="flex justify-between items-center bg-gray-100 px-3 py-2 border-b">
+                    <h3 class="text-sm font-semibold">Emploi</h3>
                     <button
                       (click)="togglePanel('categorieSociopro')"
                       class="text-lg font-bold text-gray-700"
@@ -391,13 +400,12 @@
                       ×
                     </button>
                   </div>
-
                   <div class="p-4 max-h-40 overflow-y-auto">
                     <ul>
                       <li
-                        *ngFor="let option of options"
+                        *ngFor="let option of searchInputs['categorieSociopro'].filtered"
                         class="py-1 cursor-pointer hover:bg-blue-100 px-2 rounded"
-                        (click)="selectOption(option)"
+                        (click)="selectOption('categorieSociopro', option)"
                       >
                         {{ option }}
                       </li>
@@ -408,6 +416,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
       <!-- Right Column -->
@@ -423,7 +432,7 @@
               >Date d'embauche</label
             >
             <input
-              type="text"
+              type="date"
               formControlName="dateEmbauche"
               placeholder="__/__/____"
               class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -447,7 +456,7 @@
             >
             <div class="flex gap-2">
               <input
-                type="text"
+                type="date"
                 formControlName="dateConfirmationPoste"
                 placeholder="__/__/____"
                 class="w-3/5 border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -493,7 +502,7 @@
               >Date de début</label
             >
             <input
-              type="text"
+              type="date"
               formControlName="dateDebut"
               placeholder="__/__/____"
               class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -505,7 +514,7 @@
               >Date de Fin</label
             >
             <input
-              type="text"
+              type="date"
               formControlName="dateFin"
               placeholder="__/__/____"
               class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -571,7 +580,7 @@
                 >Date de départ</label
               >
               <input
-                type="text"
+                type="date"
                 formControlName="dateDepart"
                 placeholder="__/__/____"
                 class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -609,12 +618,12 @@
     </div>
 
     <!-- Form Actions -->
-    <div class="flex justify-end p-4 border-t border-gray-200">
+    <div class="mt-6 mb-4">
       <button
         type="submit"
-        class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="px-4 py-2 bg-blue-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       >
-        Enregistrer
+        Enregistrer et continuer
       </button>
     </div>
   </form>

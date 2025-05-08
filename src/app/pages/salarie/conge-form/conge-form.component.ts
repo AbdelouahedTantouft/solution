@@ -1,6 +1,12 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from "@angular/forms";
+import { FormStateService } from "../../../core/state/salarie-form/form-state.service";
 
 @Component({
   selector: "app-conge-form",
@@ -10,7 +16,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from "@angul
 })
 export class CongeFormComponent {
   leaveForm: FormGroup;
-  months: string[] = [
+  months = [
+    "SOLDE :",
     "JANVIER",
     "FÉVRIER",
     "MARS",
@@ -26,11 +33,15 @@ export class CongeFormComponent {
   ];
 
   leaveData: any[] = [];
+  stepNumber: number = 7;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private formStateService: FormStateService
+  ) {
     this.leaveForm = this.fb.group({
-      soldeCongé: [""],
-      régulCongé: [""],
+      soldeConge: [""],
+      regulConge: [""],
       acquisType: ["calculé"],
       valeurAcquisAnnuelle: [""],
     });
@@ -41,7 +52,6 @@ export class CongeFormComponent {
       balance: 0,
     }));
   }
-
 
   calculate() {
     // Implement calculation logic here
@@ -83,7 +93,14 @@ export class CongeFormComponent {
     // Implement save functionality
     console.log("Form data:", this.leaveForm.value);
     console.log("Leave data:", this.leaveData);
-    alert("Données enregistrées");
+    const mergedData = {
+      ...this.leaveForm.value,
+      ...this.leaveData,
+    };
+    this.formStateService.updateFormData(this.stepNumber, mergedData);
+    console.log("SALARIE OBJECT-----------------------------------");
+    console.log(this.formStateService.formData$);
+    this.formStateService.nextStep();
   }
 
   updateDaysTaken(month: any, event: any) {

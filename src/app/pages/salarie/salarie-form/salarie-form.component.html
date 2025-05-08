@@ -18,174 +18,16 @@
           *ngIf="currentStep === 1"
           class="w-full relative animate-fade-in border-2 border-gray-200 rounded-lg p-6 pt-8 mt-4"
         >
-        <app-etat-civil-form></app-etat-civil-form>
+          <app-etat-civil-form></app-etat-civil-form>
         </div>
 
         <!-- Step 2: Select Plan -->
         <div *ngIf="currentStep === 2" class="animate-fade-in">
-          <h1 class="text-2xl md:text-3xl font-bold text-primary-marine mb-2">
-            Select your plan
-          </h1>
-          <div
-            class="flex space-x-4 py-4 px-4 border-2 border-gray-200 rounded-lg mt-2"
-          >
-            <div class="space-y-2 container">
-              <!-- Nationalite && dateNaissance &&  Lieu de naissance -->
-              <div class="flex gap-4">
-                <!-- Sexe 2 -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="sexe2"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                      >Sexe</label
-                    >
-                  </div>
-                  <select
-                    id="sexe2"
-                    formControlName="sexe2"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors appearance-none bg-[url('data:image/svg+xml;base64,...')] bg-no-repeat bg-[center_right_1rem]"
-                  >
-                    <option value="" disabled selected>Choisir le sexe</option>
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
-                  </select>
-                </div>
-                <!-- Nationalite -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="nationalite2"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                    >
-                      Nationalité
-                    </label>
-                  </div>
-                  <input
-                    id="nationalite2"
-                    type="text"
-                    formControlName="nationalite2"
-                    placeholder="Ex: Marocaine"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                </div>
-
-                <!-- Activite Nom -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="nom2"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                      >Nom</label
-                    >
-                  </div>
-                  <input
-                    type="text"
-                    id="nom2"
-                    formControlName="nom2"
-                    placeholder="ex. Amina"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                </div>
-              </div>
-
-              <!-- Nom && Date de naissance -->
-              <div class="w-fit lg:w-[70%] inline-flex gap-4 flex-wrap">
-                <!-- Champ Nom -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="nom2"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                      >Nom</label
-                    >
-                  </div>
-                  <input
-                    type="text"
-                    id="nom2"
-                    formControlName="nom2"
-                    placeholder="ex. Amina"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                </div>
-                <!-- Date de naissance -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="dateNaissance"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                    >
-                      Date de naissance
-                    </label>
-                  </div>
-                  <input
-                    id="dateNaissance2"
-                    type="date"
-                    formControlName="dateNaissance2"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                </div>
-              </div>
-
-              <!-- Prénom && lieu de naissance -->
-              <div class="flex gap-4">
-                <!-- Champ Prénom -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="prenom"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                      >Prénom</label
-                    >
-                    <span
-                      *ngIf="formErrors.prenom"
-                      class="text-primary-strawberry-red text-sm"
-                      >{{ formErrors.prenom }}</span
-                    >
-                  </div>
-                  <input
-                    type="text"
-                    id="prenom"
-                    formControlName="prenom"
-                    placeholder="ex. Alawi"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                    [ngClass]="{
-                      'border-primary-strawberry-red': formErrors.prenom,
-                    }"
-                  />
-                </div>
-                <!-- lieu Naissance -->
-                <div class="flex-1">
-                  <div class="flex justify-between">
-                    <label
-                      for="lieuNaissance2"
-                      class="text-sm text-primary-marine font-medium mb-1 block"
-                    >
-                      Lieu de naissance
-                    </label>
-                  </div>
-                  <input
-                    id="lieuNaissance2"
-                    type="text"
-                    formControlName="lieuNaissance2"
-                    placeholder="Ex: Casablanca"
-                    class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <app-etat-civil-etap2></app-etat-civil-etap2>
         </div>
 
         <!-- Step 3: contrat-form -->
         <div *ngIf="currentStep === 3" class="animate-fade-in">
-          <h1 class="text-2xl md:text-3xl font-bold text-primary-marine mb-2">
-            Pick add-ons
-          </h1>
-          <p class="text-neutral-cool-gray mb-6">
-            Add-ons help enhance your gaming experience.
-          </p>
-
           <app-contrat-form></app-contrat-form>
         </div>
 
@@ -207,7 +49,10 @@
         </div>
 
         <!-- Thank You Screen -->
-        <div *ngIf="completed" class="animate-fade-in text-center py-6">
+        <div
+          *ngIf="currentStep === 8"
+          class="animate-fade-in text-center py-6 px-4"
+        >
           <div
             class="mx-auto w-16 h-16 bg-primary-purplish-blue bg-opacity-10 rounded-full flex items-center justify-center mb-6"
           >
@@ -225,56 +70,181 @@
             </svg>
           </div>
           <h1 class="text-2xl md:text-3xl font-bold text-primary-marine mb-4">
-            Thank you!
+            Fiche Salarié
           </h1>
-          <p class="text-neutral-cool-gray max-w-md mx-auto">
-            Thanks for confirming your subscription! We hope you have fun using
-            our platform. If you ever need support, please feel free to email us
-            at supportloremgaming.com.
-          </p>
+
+          <!-- Identité -->
+          <h2 class="font-semibold mt-6 mb-2">Informations Personnelles</h2>
+          <table class="w-full text-left border mb-4">
+            <tr>
+              <th>Nom</th>
+              <td>{{ formData["1"].nom }}</td>
+            </tr>
+            <tr>
+              <th>Prénom</th>
+              <td>{{ formData["1"].prenom }}</td>
+            </tr>
+            <tr>
+              <th>Sexe</th>
+              <td>{{ formData[1].sexe }}</td>
+            </tr>
+            <tr>
+              <th>Date de Naissance</th>
+              <td>{{ formData["1"].dateNaissance }}</td>
+            </tr>
+            <tr>
+              <th>Nationalité</th>
+              <td>{{ formData["1"].nationalite }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ formData["1"].email }}</td>
+            </tr>
+            <tr>
+              <th>Téléphone</th>
+              <td>{{ formData["1"].phone }}</td>
+            </tr>
+          </table>
+
+          <!-- Poste -->
+          <h2 class="font-semibold mt-6 mb-2">Poste & Contrat</h2>
+          <table class="w-full text-left border mb-4">
+            <tr>
+              <th>Poste</th>
+              <td>{{ formData[3].poste }}</td>
+            </tr>
+            <tr>
+              <th>Fonction</th>
+              <td>{{ formData[3].fonction }}</td>
+            </tr>
+            <tr>
+              <th>Service</th>
+              <td>{{ formData[3].service }}</td>
+            </tr>
+            <tr>
+              <th>Catégorie</th>
+              <td>{{ formData[3].categorie }}</td>
+            </tr>
+            <tr>
+              <th>Date d'embauche</th>
+              <td>{{ formData[3].dateEmbauche }}</td>
+            </tr>
+            <tr>
+              <th>Nature du contrat</th>
+              <td>{{ formData[3].natureContrat }}</td>
+            </tr>
+            <tr>
+              <th>Statut</th>
+              <td>{{ formData[3].statut }}</td>
+            </tr>
+          </table>
+
+          <!-- Salaire -->
+          <h2 class="font-semibold mt-6 mb-2">Salaire</h2>
+          <table class="w-full text-left border mb-4">
+            <tr>
+              <th>Salaire de base</th>
+              <td>{{ formData[6].salaireBase }}</td>
+            </tr>
+            <tr>
+              <th>Indemnité de transport</th>
+              <td>{{ formData[6].indemniteTransport }}</td>
+            </tr>
+            <tr>
+              <th>Prime d'ancienneté</th>
+              <td>{{ formData[6].primeAnciennete }}</td>
+            </tr>
+            <tr>
+              <th>Heures supplémentaires</th>
+              <td>{{ formData[6].heuresSupp }}</td>
+            </tr>
+            <tr>
+              <th>Cotisations sociales</th>
+              <td>{{ formData[6].cotisationsSociales }}</td>
+            </tr>
+          </table>
+
+          <!-- Congés -->
+          <h2 class="font-semibold mt-6 mb-2">Congés</h2>
+          <table class="w-full text-left border mb-4">
+            <tr>
+              <th>Solde Congé</th>
+              <td>{{ formData[7].soldeConge }}</td>
+            </tr>
+            <tr>
+              <th>Régul. Congé</th>
+              <td>{{ formData[7].regulConge }}</td>
+            </tr>
+            <tr>
+              <th>Type d’acquis</th>
+              <td>{{ formData[7].acquisType }}</td>
+            </tr>
+            <tr>
+              <th>Valeur annuelle des acquis</th>
+              <td>{{ formData[7].valeurAcquisAnnuelle }}</td>
+            </tr>
+          </table>
+
+          <div class="flex space-x-4">
+            <button
+              (click)="exportData()"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded flex items-center"
+              [disabled]="isLoading"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Export to CSV
+            </button>
+
+            <button
+            (click)="navigateToListe()"
+            class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded flex items-center"
+            [disabled]="isLoading"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Terminé
+          </button>
+          
+          </div>
         </div>
 
         <!-- Navigation Buttons -->
         <div *ngIf="!completed" class="mt-auto pt-10 flex justify-between">
           <button
             [disabled]="currentStep === 1"
-            (click)="currentStep > 1 && (currentStep = currentStep - 1)"
+            (click)="goToPrevStep()"
             class="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           >
-          Précédent
+            Précédent
           </button>
 
           <button
-            [disabled]="currentStep === 9"
-            (click)="currentStep < 9 && (currentStep = currentStep + 1)"
-            class="px-4 py-2 bg-blue-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            *ngIf="currentStep === totalSteps"
+            (click)="completeForm()"
+            class="px-4 py-2 bg-green-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
-            <!-- [ngClass]="{
-             [disabled]="form.invalid"
-              'opacity-60 cursor-not-allowed bg-gradient-to-r from-blue-400 to-blue-500 hover:shadow-none hover:transform-none':
-                form.invalid,
-            }" -->
-            <span>Suivant</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </button>
-
-          <button
-            *ngIf="currentStep === 4"
-            type="submit"
-            class="ml-auto bg-primary-purplish-blue text-white px-5 py-2.5 rounded-lg hover:bg-opacity-90 transition-colors"
-          >
-            Confirm
+            Terminer
           </button>
         </div>
       </div>

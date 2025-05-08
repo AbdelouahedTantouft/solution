@@ -18,11 +18,18 @@ export class CountryCityService {
 
   getDemoData(): Observable<CountryCityData> {
     const demoData: CountryCityData = {
-      USA: ["New York", "Los Angeles", "Chicago", "Houston"],
-      Canada: ["Toronto", "Vancouver", "Montreal", "Calgary"],
-      UK: ["London", "Manchester", "Birmingham", "Glasgow"],
-      Germany: ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+      USA: ["New York", "Los Angeles", "Chicago", "Houston", "San Francisco"],
+      Canada: ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"],
+      UK: ["London", "Manchester", "Birmingham", "Glasgow", "Liverpool"],
+      Germany: ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne"],
+      Morocco: ["Casablanca", "Rabat", "Marrakech", "Fes", "Tangier"],
+      France: ["Paris", "Lyon", "Marseille", "Toulouse", "Nice"],
+      Spain: ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"],
+      Italy: ["Rome", "Milan", "Naples", "Turin", "Florence"],
+      Japan: ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Sapporo"],
+      Australia: ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
     };
+
     return of(demoData);
   }
 

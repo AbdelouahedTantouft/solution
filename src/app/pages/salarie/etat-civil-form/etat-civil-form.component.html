@@ -1,61 +1,61 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="flex space-x-4">
-      <div class="space-y-2 container">
+<form [formGroup]="form" (ngSubmit)="onSaveAndContinue()">
+  <div class="flex space-x-4">
+    <div class="space-y-2 container">
       <p
-            class="absolute -top-4 left-4 px-2 bg-white text-2xl md:text-3xl font-bold text-primary-marine"
+        class="absolute -top-4 left-4 px-2 bg-white text-2xl md:text-3xl font-bold text-primary-marine"
       >
-            Information Personelle
+        Information Personelle
       </p>
 
       <!-- Matrcicule && Titre -->
       <div class="flex gap-4">
-            <!-- Matricule Input -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Matricule Input -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="matricule"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Matrcicule</label
+              for="matricule"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Matrcicule</label
             >
             <span
-                  *ngIf="formErrors.matricule"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.matricule }}</span
+              *ngIf="formErrors['matricule']"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors["matricule"] }}</span
             >
-            </div>
-            <input
+          </div>
+          <input
             type="text"
             id="matricule"
             formControlName="matricule"
             placeholder="e.g. KA7889"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.matricule,
+              'border-primary-strawberry-red': formErrors.matricule,
             }"
-            />
-            </div>
-            <!-- Titre Select Input -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+          />
+        </div>
+        <!-- Titre Select Input -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="titre"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Titre</label
+              for="titre"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Titre</label
             >
             <span
-                  *ngIf="formErrors.titre"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.titre }}</span
+              *ngIf="formErrors.titre"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.titre }}</span
             >
-            </div>
-            <select
+          </div>
+          <select
             id="titre"
             formControlName="titre"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM0NjQ5NWQiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGV2cm9uLWRvd24iPjxwYXRoIGQ9Im02IDkgNiA2IDYtNiIvPjwvc3ZnPg==')] bg-no-repeat bg-[center_right_1rem]"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.titre,
+              'border-primary-strawberry-red': formErrors.titre,
             }"
-            >
+          >
             <option value="" disabled selected>Sélectionnez un titre</option>
             <option value="monsieur">Monsieur</option>
             <option value="madame">Madame</option>
@@ -63,716 +63,736 @@
             <option value="mademoiselle">Mademoiselle</option>
             <option value="professeur">Professeur</option>
             <option value="maitre">Maître</option>
-            </select>
-            </div>
+          </select>
+        </div>
       </div>
       <!-- Champ Nom -->
       <div>
-            <div class="flex justify-between">
-            <label
+        <div class="flex justify-between">
+          <label
             for="nom"
             class="text-sm text-primary-marine font-medium mb-1 block"
             >Nom</label
-            >
-            <span
-            *ngIf="formErrors.nom"
-            class="text-primary-strawberry-red text-sm"
-            >{{ formErrors.nom }}</span
-            >
-            </div>
-            <input
-            type="text"
-            id="nom"
-            formControlName="nom"
-            placeholder="ex. Mohamed"
-            class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-            [ngClass]="{
-            'border-primary-strawberry-red': formErrors.nom,
-            }"
-            />
+          >
+          <span *ngIf="formErrors.nom" class="text-red-500 text-xs italic">{{
+            formErrors.nom
+          }}</span>
+        </div>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          placeholder="ex. Mohamed"
+          class="w-full px-4 py-3 rounded bg-white text-gray-700 border leading-tight focus:outline-none focus:bg-white transition-colors"
+          [ngClass]="{
+            'border-red-500': formErrors.nom,
+            'border-neutral-light-gray': !formErrors.nom,
+          }"
+        />
       </div>
 
       <!-- Champ Prénom -->
       <div>
-            <div class="flex justify-between">
-            <label
+        <div class="flex justify-between">
+          <label
             for="prenom"
             class="text-sm text-primary-marine font-medium mb-1 block"
             >Prénom</label
-            >
-            <span
-            *ngIf="formErrors.prenom"
-            class="text-primary-strawberry-red text-sm"
-            >{{ formErrors.prenom }}</span
-            >
-            </div>
-            <input
-            type="text"
-            id="prenom"
-            formControlName="prenom"
-            placeholder="ex. Alawi"
-            class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-            [ngClass]="{
-            'border-primary-strawberry-red': formErrors.prenom,
-            }"
-            />
+          >
+          <span *ngIf="formErrors.prenom" class="text-red-500 text-xs italic">{{
+            formErrors.prenom
+          }}</span>
+        </div>
+        <input
+          type="text"
+          id="prenom"
+          formControlName="prenom"
+          placeholder="ex. Alawi"
+          class="w-full px-4 py-3 rounded bg-white text-gray-700 border leading-tight focus:outline-none focus:bg-white transition-colors"
+          [ngClass]="{
+            'border-red-500': formErrors.prenom,
+            'border-neutral-light-gray': !formErrors.prenom,
+          }"
+        />
       </div>
 
       <!-- Sexe && Situation familiale -->
       <div class="flex gap-4">
-            <!-- Sexe -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Sexe -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="sexe"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Sexe</label
+              for="sexe"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Sexe</label
             >
             <span
-                  *ngIf="formErrors.sexe"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.sexe }}</span
+              *ngIf="formErrors.sexe"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.sexe }}</span
             >
-            </div>
-            <select
+          </div>
+          <select
             id="sexe"
             formControlName="sexe"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors appearance-none bg-[url('data:image/svg+xml;base64,...')] bg-no-repeat bg-[center_right_1rem]"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.sexe,
+              'border-primary-strawberry-red': formErrors.sexe,
             }"
-            >
+          >
             <option value="" disabled selected>Choisir le sexe</option>
             <option value="homme">Homme</option>
             <option value="femme">Femme</option>
-            </select>
-            </div>
+          </select>
+        </div>
 
-            <!-- Situation familiale -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Situation familiale -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="situationFamiliale"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Situation familiale</label
+              for="situationFamiliale"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Situation familiale</label
             >
             <span
-                  *ngIf="formErrors.situationFamiliale"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.situationFamiliale }}</span
+              *ngIf="formErrors.situationFamiliale"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.situationFamiliale }}</span
             >
-            </div>
-            <select
+          </div>
+          <select
             id="situationFamiliale"
             formControlName="situationFamiliale"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors appearance-none bg-[url('data:image/svg+xml;base64,...')] bg-no-repeat bg-[center_right_1rem]"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.situationFamiliale,
+              'border-primary-strawberry-red': formErrors.situationFamiliale,
             }"
-            >
+          >
             <option value="" disabled selected>Choisir une situation</option>
             <option value="celibataire">Célibataire</option>
             <option value="marie">Marié</option>
             <option value="mariee">Mariée</option>
             <option value="divorce">Divorcé(e)</option>
             <option value="veuf">Veuf/Veuve</option>
-            </select>
-            </div>
+          </select>
+        </div>
       </div>
 
       <!-- Adresse -->
       <div>
-            <div class="flex justify-between">
-            <label
+        <div class="flex justify-between">
+          <label
             for="adresse"
             class="text-sm text-primary-marine font-medium mb-1 block"
             >Adresse</label
-            >
-            <span
+          >
+          <span
             *ngIf="formErrors.adresse"
-            class="text-primary-strawberry-red text-sm"
-            >{{ formErrors.adresse }}</span
-            >
-            </div>
+            class="text-red-500 text-xs italic"
+            >{{ formErrors.adresseLigne1 }}</span
+          >
+        </div>
 
-            <input
-            type="text"
-            id="adresseLigne1"
-            formControlName="adresseLigne1"
-            placeholder="Rue, numéro"
-            class="my-2 w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-            [ngClass]="{
-            'border-primary-strawberry-red': formErrors.adresseLigne1,
-            }"
-            />
-            <input
-            type="text"
-            id="adresseLigne2"
-            formControlName="adresseLigne2"
-            placeholder="Complément d’adresse 1"
-            class="my-2 w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-            [ngClass]="{
+        <input
+          type="text"
+          id="adresseLigne1"
+          formControlName="adresseLigne1"
+          placeholder="Rue, numéro"
+          class="w-full px-4 py-3 rounded bg-white text-gray-700 border leading-tight focus:outline-none focus:bg-white transition-colors"
+          [ngClass]="{
+            'border-red-500': formErrors.adresseLigne1,
+            'border-neutral-light-gray': !formErrors.adresseLigne1,
+          }"
+        />
+        <input
+          type="text"
+          id="adresseLigne2"
+          formControlName="adresseLigne2"
+          placeholder="Complément d’adresse 1"
+          class="my-2 w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
+          [ngClass]="{
             'border-primary-strawberry-red': formErrors.adresseLigne2,
-            }"
-            />
-            <input
-            type="text"
-            id="adresseLigne2"
-            formControlName="adresseLigne2"
-            placeholder="Complément d’adresse 2"
-            class="my-2 w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-            [ngClass]="{
+          }"
+        />
+        <input
+          type="text"
+          id="adresseLigne3"
+          formControlName="adresseLigne3"
+          placeholder="Complément d’adresse 2"
+          class="my-2 w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
+          [ngClass]="{
             'border-primary-strawberry-red': formErrors.adresseLigne2,
-            }"
-            />
+          }"
+        />
       </div>
 
       <!-- Pays && Ville familiale -->
       <div class="flex gap-4">
-            <!-- Pays Select Input -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Pays Select Input -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="country"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Pays</label
+              for="country"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Pays</label
             >
             <span
-                  *ngIf="formErrors.pays"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.pays }}</span
+              *ngIf="formErrors.pays"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.pays }}</span
             >
-            </div>
+          </div>
 
-            <select
+          <select
             formControlName="country"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray"
             name="country"
             id="country"
-            >
+          >
             <option value="">Select a country</option>
             <option *ngFor="let country of countries" [value]="country">
-                  {{ country }}
+              {{ country }}
             </option>
-            </select>
-            </div>
+          </select>
+        </div>
 
-            <!-- ville Select Input -->
+        <!-- ville Select Input -->
 
-            <div class="flex-1">
-            <fieldset class="paysFieldset">
+        <div class="flex-1">
+          <fieldset class="paysFieldset">
             <div class="flex justify-between">
-                  <label
-                  for="city"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Ville</label
-                  >
-                  <span
-                  *ngIf="formErrors.titre"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.titre }}</span
-                  >
+              <label
+                for="city"
+                class="text-sm text-primary-marine font-medium mb-1 block"
+                >Ville</label
+              >
+              <span
+                *ngIf="formErrors.titre"
+                class="text-primary-strawberry-red text-sm"
+                >{{ formErrors.titre }}</span
+              >
             </div>
             <select
-                  id="city"
-                  formControlName="city"
-                  class="form-control"
-                  [disabled]="!form.get('country')?.value"
-                  class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray"
-                  [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.titre,
-                  }"
+              id="city"
+              formControlName="city"
+              class="form-control"
+              [disabled]="!form.get('country')?.value"
+              class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray"
+              [ngClass]="{
+                'border-primary-strawberry-red': formErrors.titre,
+              }"
             >
-                  <option value="">Select a city</option>
-                  <option *ngFor="let city of cities" [value]="city">
-                  {{ city }}
-                  </option>
+              <option value="">Select a city</option>
+              <option *ngFor="let city of cities" [value]="city">
+                {{ city }}
+              </option>
             </select>
-            </fieldset>
-            </div>
+          </fieldset>
+        </div>
       </div>
-      </div>
+    </div>
 
-      <div class="space-y-2 container flex">
+    <div class="space-y-2 container flex">
       <div class="flex-1">
-            <!-- Les Buttons  -->
-            <div class="flex gap-4">
-            <div class="space-y-2">
+        <!-- Les Buttons  -->
+        <div class="flex gap-4">
+          <div class="space-y-2">
             <!-- Importer les Fiches Salariés -->
-            <button
-                  type="button"
-                  class="flex items-center justify-between bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow"
+            <label
+              class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded cursor-pointer"
             >
-                  <span>Importer les Fiches Salariés</span>
-                  <i class="fas fa-file-excel text-white text-lg"></i>
-            </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 inline mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Choose File
+              <input
+                type="file"
+                accept=".csv"
+                (change)="onFileSelectedCsv($event)"
+                class="hidden"
+                [disabled]="isLoading"
+              />
+            </label>
 
-            <!-- Mise à jour les Fiches Salariés -->
-            <button
-                  type="button"
-                  class="flex items-center justify-between bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow"
+            <div
+              *ngIf="importStatus"
+              [ngClass]="{
+                'text-green-600': importStatus.includes('success'),
+                'text-red-600':
+                  importStatus.includes('failed') ||
+                  importStatus.includes('No'),
+                'text-blue-600': importStatus.includes('Importing'),
+              }"
+              class="mt-2 text-sm font-medium"
             >
-                  <span>Mise à jour les Fiches Salariés</span>
-                  <i class="fas fa-file-edit text-white text-lg"></i>
-            </button>
+              <div class="flex items-center">
+                <!-- Loading spinner -->
+                <div
+                  *ngIf="isLoading"
+                  class="mr-2 animate-spin h-4 w-4 border-2 border-blue-500 rounded-full border-t-transparent"
+                ></div>
+                {{ importStatus }}
+              </div>
+            </div>
 
             <div class="flex flex-col gap-4">
-                  <!-- Nombre d'enfants Input -->
-                  <div class="flex-1">
-                  <div class="flex justify-between">
+              <!-- Nombre d'enfants Input -->
+              <div class="flex-1">
+                <div class="flex justify-between">
                   <label
-                        for="nombreEnfants"
-                        class="text-sm text-primary-marine font-medium mb-1 block"
-                        >Nombre d'enfants</label
+                    for="nombreEnfants"
+                    class="text-sm text-primary-marine font-medium mb-1 block"
+                    >Nombre d'enfants</label
                   >
                   <span
-                        *ngIf="formErrors.nombreEnfants"
-                        class="text-primary-strawberry-red text-sm"
-                        >{{ formErrors.nombreEnfants }}</span
+                    *ngIf="formErrors.nombreEnfants"
+                    class="text-primary-strawberry-red text-sm"
+                    >{{ formErrors.nombreEnfants }}</span
                   >
-                  </div>
-                  <input
+                </div>
+                <input
                   id="nombreEnfants"
                   formControlName="nombreEnfants"
                   type="number"
                   class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                  </div>
+                />
+              </div>
 
-                  <!-- Nombre d'enfants à charge Input -->
-                  <div class="flex-1">
-                  <div class="flex justify-between">
+              <!-- Nombre d'enfants à charge Input -->
+              <div class="flex-1">
+                <div class="flex justify-between">
                   <label
-                        for="enfantsCharge"
-                        class="text-sm text-primary-marine font-medium mb-1 block"
-                        >Nombre d'enfants à charge</label
+                    for="enfantsCharge"
+                    class="text-sm text-primary-marine font-medium mb-1 block"
+                    >Nombre d'enfants à charge</label
                   >
                   <span
-                        *ngIf="formErrors.enfantsCharge"
-                        class="text-primary-strawberry-red text-sm"
-                        >{{ formErrors.enfantsCharge }}</span
+                    *ngIf="formErrors.enfantsCharge"
+                    class="text-primary-strawberry-red text-sm"
+                    >{{ formErrors.enfantsCharge }}</span
                   >
-                  </div>
-                  <input
+                </div>
+                <input
                   id="enfantsCharge"
                   formControlName="enfantsCharge"
                   type="number"
                   class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                  </div>
+                />
+              </div>
 
-                  <!-- Pris en compte Checkbox -->
-                  <div class="flex-1">
-                  <div class="flex justify-between">
+              <!-- Pris en compte Checkbox -->
+              <div class="flex-1">
+                <div class="flex justify-between">
                   <label
-                        for="prisEnCompte"
-                        class="text-sm text-primary-marine font-medium mb-1 block"
-                        >Pris en compte</label
+                    for="prisEnCompte"
+                    class="text-sm text-primary-marine font-medium mb-1 block"
+                    >Pris en compte</label
                   >
                   <span
-                        *ngIf="formErrors.prisEnCompte"
-                        class="text-primary-strawberry-red text-sm"
-                        >{{ formErrors.prisEnCompte }}</span
+                    *ngIf="formErrors.prisEnCompte"
+                    class="text-primary-strawberry-red text-sm"
+                    >{{ formErrors.prisEnCompte }}</span
                   >
-                  </div>
-                  <input
+                </div>
+                <input
                   id="prisEnCompte"
                   formControlName="prisEnCompte"
                   type="checkbox"
                   class="rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
-                  />
-                  </div>
+                />
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
+        </div>
 
-            <!-- Email  -->
-            <div class="my-4">
-            <div class="flex justify-between">
+        <!-- Email  -->
+        <div class="my-4">
+          <div class="flex justify-between">
             <label
-                  for="email"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Email Address</label
+              for="email"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Email Address</label
             >
             <span
-                  *ngIf="formErrors.email"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.email }}</span
+              *ngIf="formErrors.email"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.email }}</span
             >
-            </div>
-            <input
+          </div>
+          <input
             type="email"
             id="email"
             formControlName="email"
             placeholder="e.g. name@gmail.com"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.email,
+              'border-primary-strawberry-red': formErrors.email,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- Phone  -->
-            <div>
-            <div class="flex justify-between">
+        <!-- Phone  -->
+        <div>
+          <div class="flex justify-between">
             <label
-                  for="phone"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
-                  >Phone Number</label
+              for="phone"
+              class="text-sm text-primary-marine font-medium mb-1 block"
+              >Phone Number</label
             >
             <span
-                  *ngIf="formErrors.phone"
-                  class="text-primary-strawberry-red text-sm"
-                  >{{ formErrors.phone }}</span
+              *ngIf="formErrors.phone"
+              class="text-primary-strawberry-red text-sm"
+              >{{ formErrors.phone }}</span
             >
-            </div>
-            <input
+          </div>
+          <input
             type="tel"
             id="phone"
             formControlName="phone"
             placeholder="e.g. +212 643 567 890"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.phone,
+              'border-primary-strawberry-red': formErrors.phone,
             }"
-            />
-            </div>
+          />
+        </div>
       </div>
       <div class="flex flex-col flex-0 items-center space-y-2 p-2 mx-auto">
-            <!-- Checkbox for "actif" -->
-            <div class="flex items-center w-full">
-            <input
-            name="isActive"
+        <!-- Checkbox for "actif" -->
+        <div class="flex items-center w-full">
+          <input
             type="checkbox"
             id="actif"
-            [(ngModel)]="isActive"
+            formControlName="isActive"
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-            />
-            <label for="actif" class="ml-2 text-sm font-medium text-gray-700"
+          />
+          <label for="actif" class="ml-2 text-sm font-medium text-gray-700"
             >Actif</label
-            >
-            </div>
+          >
+        </div>
 
-            <!-- Image placeholder -->
-            <div
-            class="w-56 h-56 border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors relative overflow-hidden"
-            (click)="fileInput.click()"
-            [class.border-blue-500]="isActive"
-            >
-            <input
+        <!-- Image placeholder -->
+        <div
+          class="w-56 h-56 border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors relative overflow-hidden"
+          (click)="fileInput.click()"
+          [class.border-blue-500]="isActive"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+        >
+          <input
             name="profileImage"
             #fileInput
             type="file"
             accept="image/*"
             class="hidden"
             (change)="onFileSelected($event)"
-            />
-
-            <ng-container *ngIf="!imageUrl; else uploadedImage">
-            <div class="flex flex-col items-center justify-center text-gray-500">
-                  <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-16 w-16 mb-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  >
-                  <path
+          />
+          <ng-container *ngIf="!imageUrl; else uploadedImage">
+            <div
+              class="flex flex-col items-center justify-center text-gray-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-16 w-16 mb-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                  </svg>
-                  <p class="text-sm">Cliquez pour sélectionner une image</p>
+                />
+              </svg>
+              <p class="text-sm">Cliquez pour sélectionner une image</p>
             </div>
-            </ng-container>
-
-            <ng-template #uploadedImage>
+          </ng-container>
+          <ng-template #uploadedImage>
             <img
-                  [src]="imageUrl"
-                  class="w-full h-full object-cover"
-                  alt="Uploaded image"
+              [src]="imageUrl"
+              class="w-full h-full object-cover"
+              alt="Uploaded image"
             />
             <div
-                  class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+              class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
             >
-                  <button
-                  class="bg-red-500 text-white p-2 rounded-full"
-                  (click)="removeImage($event)"
-                  >
-                  <svg
+              <button
+                class="bg-red-500 text-white p-2 rounded-full"
+                (click)="removeImage($event)"
+              >
+                <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-5 w-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  >
+                >
                   <path
-                        fill-rule="evenodd"
-                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                        clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clip-rule="evenodd"
                   />
-                  </svg>
-                  </button>
+                </svg>
+              </button>
             </div>
-            </ng-template>
-            </div>
+          </ng-template>
+        </div>
+       
+      </div>
+    </div>
+  </div>
 
-            <!-- Import button -->
-            <button
-            (click)="fileInput.click()"
-            class="flex items-center justify-center py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition-colors rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2"
-            [disabled]="imageUrl"
-            >
-            <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            >
-            <path
-                  fill-rule="evenodd"
-                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z"
-                  clip-rule="evenodd"
-            />
-            </svg>
-            Importer photo
-            </button>
-      </div>
-      </div>
-      </div>
-
-      <div class="flex space-x-4 py-4 px-4 border-2 border-gray-200 rounded-lg mt-2">
-      <div class="space-y-2 container">
+  <div
+    class="flex space-x-4 py-4 px-4 border-2 border-gray-200 rounded-lg mt-2"
+  >
+    <div class="space-y-2 container">
       <!-- Nationalite && dateNaissance &&  Lieu de naissance -->
       <div class="flex gap-4">
-            <!-- Nationalite -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Nationalite -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="nationalite"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="nationalite"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  Nationalité
+              Nationalité
             </label>
             <span
-                  *ngIf="formErrors.nationalite"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.nationalite"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.nationalite }}
+              {{ formErrors.nationalite }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="nationalite"
             type="text"
             formControlName="nationalite"
             placeholder="Ex: Marocaine"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.nationalite,
+              'border-primary-strawberry-red': formErrors.nationalite,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- ville Select Input -->
+        <!-- ville Select Input -->
 
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="dateNaissance"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="dateNaissance"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  Date de naissance
+              Date de naissance
             </label>
             <span
-                  *ngIf="formErrors.dateNaissance"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.dateNaissance"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.dateNaissance }}
+              {{ formErrors.dateNaissance }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="dateNaissance"
             type="date"
             formControlName="dateNaissance"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.dateNaissance,
+              'border-primary-strawberry-red': formErrors.dateNaissance,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- lieu Naissance -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- lieu Naissance -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="lieuNaissance"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="lieuNaissance"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  Lieu de naissance
+              Lieu de naissance
             </label>
             <span
-                  *ngIf="formErrors.lieuNaissance"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.lieuNaissance"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.lieuNaissance }}
+              {{ formErrors.lieuNaissance }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="lieuNaissance"
             type="text"
             formControlName="lieuNaissance"
             placeholder="Ex: Casablanca"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.lieuNaissance,
+              'border-primary-strawberry-red': formErrors.lieuNaissance,
             }"
-            />
-            </div>
+          />
+        </div>
       </div>
 
       <!-- CIN && Date de CIN -->
       <div class="w-fit lg:w-[70%] inline-flex gap-4 flex-wrap">
-            <!-- CIN -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- CIN -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="cin"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="cin"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  CIN
+              CIN
             </label>
             <span
-                  *ngIf="formErrors.cin"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.cin"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.cin }}
+              {{ formErrors.cin }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="cin"
             type="text"
             formControlName="cin"
             placeholder="Ex: AB123456"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.cin,
+              'border-primary-strawberry-red': formErrors.cin,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- Date de CIN -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Date de CIN -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="dateCin"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="dateCin"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  Date de CIN
+              Date de CIN
             </label>
             <span
-                  *ngIf="formErrors.dateCin"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.dateCin"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.dateCin }}
+              {{ formErrors.dateCin }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="dateCin"
             type="date"
             formControlName="dateCin"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.dateCin,
+              'border-primary-strawberry-red': formErrors.dateCin,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- N° IF salarié -->
+        <!-- N° IF salarié -->
       </div>
       <div class="flex gap-4">
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="ifSalarie"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="ifSalarie"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  N° IF salarié
+              N° IF salarié
             </label>
             <span
-                  *ngIf="formErrors.ifSalarie"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.ifSalarie"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.ifSalarie }}
+              {{ formErrors.ifSalarie }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="ifSalarie"
             type="text"
             formControlName="ifSalarie"
             placeholder="Ex: 12345678"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.ifSalarie,
+              'border-primary-strawberry-red': formErrors.ifSalarie,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- Date de passeport -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Date de passeport -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="datePasseport"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="datePasseport"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  Date de passeport
+              Date de passeport
             </label>
             <span
-                  *ngIf="formErrors.datePasseport"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.datePasseport"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.datePasseport }}
+              {{ formErrors.datePasseport }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="datePasseport"
             type="date"
             formControlName="datePasseport"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.datePasseport,
+              'border-primary-strawberry-red': formErrors.datePasseport,
             }"
-            />
-            </div>
+          />
+        </div>
 
-            <!-- Carte de séjour -->
-            <div class="flex-1">
-            <div class="flex justify-between">
+        <!-- Carte de séjour -->
+        <div class="flex-1">
+          <div class="flex justify-between">
             <label
-                  for="carteSejour"
-                  class="text-sm text-primary-marine font-medium mb-1 block"
+              for="carteSejour"
+              class="text-sm text-primary-marine font-medium mb-1 block"
             >
-                  Carte de séjour
+              Carte de séjour
             </label>
             <span
-                  *ngIf="formErrors.carteSejour"
-                  class="text-primary-strawberry-red text-sm"
+              *ngIf="formErrors.carteSejour"
+              class="text-primary-strawberry-red text-sm"
             >
-                  {{ formErrors.carteSejour }}
+              {{ formErrors.carteSejour }}
             </span>
-            </div>
-            <input
+          </div>
+          <input
             id="carteSejour"
             type="text"
             formControlName="carteSejour"
             placeholder="Ex: CS123456"
             class="w-full px-4 py-3 rounded-lg border border-neutral-light-gray focus:border-primary-purplish-blue focus:outline-none transition-colors"
             [ngClass]="{
-                  'border-primary-strawberry-red': formErrors.carteSejour,
+              'border-primary-strawberry-red': formErrors.carteSejour,
             }"
-            />
-            </div>
+          />
+        </div>
       </div>
-      </div>
-      </div>
+    </div>
+  </div>
+  <div class="mt-6">
+    <button
+      type="submit"
+      class="px-4 py-2 bg-blue-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+    >
+      Enregistrer et continuer
+    </button>
+  </div>
 </form>

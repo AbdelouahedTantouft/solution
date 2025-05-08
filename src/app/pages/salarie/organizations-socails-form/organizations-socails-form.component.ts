@@ -1,6 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from "@angular/forms";
+import { FormStateService } from "../../../core/state/salarie-form/form-state.service";
 
 interface SocialOrganization {
   code: string;
@@ -17,6 +23,8 @@ interface SocialOrganization {
   styleUrl: "./organizations-socails-form.component.scss",
 })
 export class OrganizationsSocailsFormComponent {
+  oganismesForm: FormGroup;
+  stepNumber: number = 4;
   organizations: SocialOrganization[] = [
     {
       code: "01",
@@ -55,12 +63,73 @@ export class OrganizationsSocailsFormComponent {
     },
   ];
 
+  constructor(
+    private fb: FormBuilder,
+    private formStateService: FormStateService
+  ) {
+    this.oganismesForm = this.fb.group({
+      // Position section
+      CNSSRegistrationNumber: [""],
+      CNSSRegistrationDate: [""],
+      CIMRRegistrationNumber: [""],
+      CIMRRegistrationDate: [""],
+      MUTUELLERegistrationNumber: [""],
+      MUTUELLERegistrationDate: [""],
+      CIMR4RegistrationNumber: [""],
+      CIMR4RegistrationDate: [""],
+      AMORegistrationNumber: [""],
+      AMORegistrationDate: [""],
+    });
+  }
+
+  ngOnInit(): void {
+    // Load saved form data if available
+    const savedData = this.formStateService.getStepFormData(this.stepNumber);
+    if (savedData) {
+      this.oganismesForm.patchValue(savedData);
+    }
+  }
+
   editOrganization(org: SocialOrganization): void {
     org.isEditing = true;
   }
 
   saveOrganization(org: SocialOrganization): void {
     org.isEditing = false;
-    console.log('Saved:', org);
+    console.log("Saved:", org);
+  }
+
+  saveFormData(): void {
+    this.formStateService.updateFormData(
+      this.stepNumber,
+      this.oganismesForm.value
+    );
+
+    this.formStateService.updateStepState(this.stepNumber, {
+      valid: this.oganismesForm.valid,
+      completed: this.oganismesForm.dirty || this.oganismesForm.touched,
+    });
+  }
+
+  onSaveAndContinue(): void {
+    if (this.oganismesForm.invalid) {
+      this.markFormGroupTouched(this.oganismesForm);
+      return;
+    }
+
+    this.saveFormData();
+    this.formStateService.nextStep();
+    console.log(this.formStateService.getStepFormData(this.stepNumber));
+  }
+
+  // Helper method to mark all controls as touched
+  private markFormGroupTouched(formGroup: FormGroup): void {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }

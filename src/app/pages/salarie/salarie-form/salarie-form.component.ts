@@ -36,9 +36,16 @@ import { BankPaymentFormComponent } from "../bank-payment-form/bank-payment-form
 import { BulletinModelComponent } from "../bulletin-model/bulletin-model.component";
 import { CongeFormComponent } from "../conge-form/conge-form.component";
 import { EtatCivilFormComponent } from "../etat-civil-form/etat-civil-form.component";
+import { EtatCivilEtap2Component } from "../etat-civil-etap2/etat-civil-etap2.component";
+import { Subscription } from "rxjs";
+import { FormStateService } from "../../../core/state/salarie-form/form-state.service";
+import { CsvService } from "../../../core/state/csv/csv.service";
+import { Router } from "@angular/router";
+import { RouterModule } from "@angular/router";
 @Component({
   selector: "app-salarie-form",
-  imports: [CommonModule, 
+  imports: [
+    CommonModule,
     StepperComponent,
     ReactiveFormsModule,
     FormsModule,
@@ -47,21 +54,32 @@ import { EtatCivilFormComponent } from "../etat-civil-form/etat-civil-form.compo
     BankPaymentFormComponent,
     BulletinModelComponent,
     CongeFormComponent,
-    EtatCivilFormComponent],
+    EtatCivilFormComponent,
+    EtatCivilEtap2Component,
+    RouterModule,
+  ],
   templateUrl: "./salarie-form.component.html",
   styleUrl: "./salarie-form.component.scss",
 })
 export class SalarieFormComponent {
+  formData: { [key: string]: any } = {};
+
   form: FormGroup;
   currentStep = 1;
   completed = false;
+  totalSteps = 7;
   billingPeriod = "monthly";
-  formErrors: any = {};
+  salarie: any = {};
+
   countries: string[] = [];
   cities: string[] = [];
   imagePreview: string | null = null;
   selectedImage: File | null = null;
   @ViewChild("fileInput") fileInput!: ElementRef;
+  importStatus: string = "";
+  isLoading: boolean = false;
+
+  private subscriptions: Subscription[] = [];
 
   plans = [
     {
@@ -117,10 +135,33 @@ export class SalarieFormComponent {
     },
   ];
 
+  stepLabels = {
+    1: "Personal Information",
+    2: "Additional Information",
+    3: "Contract Information",
+    4: "Organization Details",
+    5: "Payment Information",
+    6: "Bulletin Model",
+    7: "Leave Information",
+  };
+
+  keyFields = {
+    1: ["matricule", "nom", "prenom", "email", "phone"],
+    2: ["nom2", "prenom", "activite"],
+    3: ["poste", "fonction", "dateEmbauche", "natureContrat"],
+    4: ["CNSSRegistrationNumber", "CIMRRegistrationNumber"],
+    5: ["paymentMode", "bankNom1", "bankRib1"],
+    6: ["salaireBase", "indemniteTransport"],
+    7: ["soldeConge", "acquisType"],
+  };
+
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private countryCityService: CountryCityService
+    private countryCityService: CountryCityService,
+    private formStateService: FormStateService,
+    private csvService: CsvService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       matricule: ["", Validators.required],
@@ -161,27 +202,50 @@ export class SalarieFormComponent {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => {
-      this.validateForm();
-    });
-    this.form.valueChanges.subscribe((value) => {
-      this.store.dispatch(updateFormValue({ formValue: value }));
-    });
+    this.subscriptions.push(
+      this.formStateService.currentStep$.subscribe((step) => {
+        this.currentStep = step;
+      }),
 
-    this.countryCityService.getDemoData().subscribe((data) => {
-      this.countryCityService.setData(data);
-      this.countries = this.countryCityService.getAllCountries();
-
-      this.form.get("country")?.valueChanges.subscribe((country) => {
-        if (country) {
-          this.cities = this.countryCityService.getCitiesByCountry(country);
-          this.form.get("city")?.setValue("");
-        } else {
-          this.cities = [];
-        }
-      });
+      this.formStateService.completed$.subscribe((isCompleted) => {
+        this.completed = isCompleted;
+      })
+    );
+    this.formStateService.formData$.subscribe((data) => {
+      this.formData = data;
+      console.log("Form data loaded:", this.formData);
     });
-    console.log(this.countries);
+  }
+
+  formatFieldName(name: string): string {
+    const withSpaces = name.replace(/([A-Z])/g, " $1");
+    return withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  goToNextStep(): void {
+    if (this.formStateService.canProceedToNextStep()) {
+      this.formStateService.nextStep();
+    }
+  }
+
+  goToPrevStep(): void {
+    this.formStateService.prevStep();
+  }
+
+  completeForm(): void {
+    this.formStateService.completeForm();
+  }
+
+  resetForm(): void {
+    this.formStateService.resetForm();
+  }
+
+  canNavigateToStep(step: number): boolean {
+    return this.formStateService.canNavigateToStep(step);
   }
 
   isActive = false;
@@ -240,30 +304,8 @@ export class SalarieFormComponent {
     return "";
   }
 
-  validateForm() {
-    this.formErrors = {};
-
-    // Only validate the current step
-    if (this.currentStep === 1) {
-      const controls = ["name", "email", "phone"];
-      controls.forEach((control) => {
-        const formControl = this.form.get(control);
-        if (
-          formControl?.invalid &&
-          (formControl?.dirty || formControl?.touched)
-        ) {
-          if (formControl?.errors?.["required"]) {
-            this.formErrors[control] = "This field is required";
-          } else if (control === "email" && formControl?.errors?.["email"]) {
-            this.formErrors[control] = "Please enter a valid email";
-          }
-        }
-      });
-    }
-  }
-
   nextStep() {
-    this.currentStep  = this.currentStep + 1;
+    this.currentStep = this.currentStep + 1;
   }
 
   previousStep() {
@@ -369,5 +411,35 @@ export class SalarieFormComponent {
 
     // Here you would call your API service to submit the form
     // this.userService.saveUserInfo(formData).subscribe(...);
+  }
+
+  exportData(): void {
+    if (!this.formData || Object.keys(this.formData).length === 0) {
+      this.importStatus = "No form data available to export";
+      return;
+    }
+
+    try {
+      // Convert to CSV
+      const csvData = this.csvService.exportToCsv(this.formData);
+
+      // Generate filename with date
+      const date = new Date().toISOString().split("T")[0];
+      const filename = `form-data-${date}.csv`;
+
+      // Download file
+      this.csvService.downloadCsv(csvData, filename);
+
+      this.importStatus = "Data exported successfully";
+    } catch (error) {
+      console.error("Export error:", error);
+      this.importStatus = `Export failed: ${error}`;
+    }
+  }
+
+  navigateToListe() {
+    this.formStateService.addFormDataItem(this.formData['1'].name, this.formData)
+    this.formStateService.resetForm()
+    this.router.navigate(["/pages/fiche-salarie/liste-salaries"]);
   }
 }

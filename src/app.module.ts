@@ -28,7 +28,6 @@ import { PretsComponent } from "./app/pages/prets/prets.component";
 import { CalculPaieComponent } from "./app/pages/calcul-paie/calcul-paie.component";
 //EXTERNAL LIBRARIES
 import { DataTablesModule } from "angular-datatables";
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +54,7 @@ import { DataTablesModule } from "angular-datatables";
     CalendarModule, // Module PrimeNG pour le calendrier
     FloatLabelModule, // Module PrimeNG pour l'étiquette flottante
     DataTablesModule,
+    ToastNoAnimationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent], // Définir le composant principal
